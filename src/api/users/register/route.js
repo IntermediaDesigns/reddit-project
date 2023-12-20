@@ -32,6 +32,7 @@ export async function POST(req) {
       process.env.JWT_SECRET
     );
     cookieStore.set('token', token);
+
     return NextResponse.json({ success: true, user });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });

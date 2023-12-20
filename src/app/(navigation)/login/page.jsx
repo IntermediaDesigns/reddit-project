@@ -46,7 +46,10 @@ export default function Login() {
           Login
         </button>
         <p className={styles.formText}>
-          Need to register? <a className={styles.here} href='/register'>Register Here</a>
+          Need to register?{' '}
+          <a className={styles.here} href='/register'>
+            Register Here
+          </a>
         </p>
         <p className={styles.formError}>{error}</p>
       </form>

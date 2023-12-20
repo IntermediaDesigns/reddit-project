@@ -1,11 +1,11 @@
-import { prisma } from "./prisma.js";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
+import { prisma } from './prisma.js';
+import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
 
 export async function fetchUser() {
   try {
     const cookieStore = cookies();
-    const userCookie = cookieStore.get("token");
+    const userCookie = cookieStore.get('token');
     if (!userCookie) {
       return {};
     }
