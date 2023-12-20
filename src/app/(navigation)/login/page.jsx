@@ -14,18 +14,27 @@ export default function Login() {
     e.preventDefault();
     const res = await fetch('/api/users/login', {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
       body: JSON.stringify({ username, password }),
     });
-    console.log(res)
-
-    const data = await res.json() 
-    if (data.error) {
-      return setError(data.error)
+  
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success) {
+        document.cookie = `token=${data.token}; path=/`;
+        router.push('/');
+        router.refresh();
+      } else {
+        setError(data.error);
+      }
+    } else {
+      const errorData = await res.json();
+      setError(errorData.error);
     }
-    
-    router.push('/');
-    router.refresh();
   }
+  
 
   return (
     <div className={styles.main}>

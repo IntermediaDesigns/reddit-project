@@ -1,21 +1,31 @@
 'use client';
 import Link from 'next/link.js';
-import { useRouter } from 'next/navigation.js';
 import { useState } from 'react';
 import styles from '@/app/page.module.css';
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation.js';
 
 export default function Logout() {
-  const router = useRouter();
 
+  const router = useRouter();
+  
   const handleLogout = async () => {
+    // Check if the user is already logged out
+    const token = Cookies.get('token');
+    if (!token) {
+      setError('Error: No user is currently logged in.');
+      return;
+    }
+  
     try {
       const response = await fetch('/api/users/logout', { method: 'POST' });
       const info = await response.json();
-
+  
       if (response.ok) {
         router.refresh();
         setLogoutMessage('Successfully logged out!');
         setShouldShowButtons(true);
+        Cookies.remove('token'); 
       } else {
         setError(info.message);
       }
@@ -24,6 +34,7 @@ export default function Logout() {
       setError('Something went wrong. Please try again later.');
     }
   };
+  
 
   const [logoutMessage, setLogoutMessage] = useState('');
   const [shouldShowButtons, setShouldShowButtons] = useState(false);
