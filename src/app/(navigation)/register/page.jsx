@@ -12,14 +12,12 @@ export default function Register() {
 
   async function handleRegister(e) {
     e.preventDefault();
+
     const res = await fetch('/api/users/register', {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
-    const info = await res.json();
-    if (info.error) {
-      return setError(info.error);
-    }
+  
     router.push('/');
     router.refresh();
   }

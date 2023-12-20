@@ -16,10 +16,7 @@ export default function Login() {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
-    const info = await res.json();
-    if (info.error) {
-      return setError(info.error);
-    }
+    
     router.push('/');
     router.refresh();
   }
