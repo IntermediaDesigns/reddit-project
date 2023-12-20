@@ -1,6 +1,6 @@
 import styles from '@/app/page.module.css';
 import './globals.css';
-import Posts from './components/Posts.jsx';
+
 
 export default function Home() {
   return (
