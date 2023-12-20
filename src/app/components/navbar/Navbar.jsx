@@ -3,34 +3,38 @@ import styles from '@/app/page.module.css';
 
 export default function Navbar() {
   return (
-    <nav className={styles.navContainer}>
-      <div className={styles.logoContainer}>
-        <Link className={styles.logoLink} href={'/'}>
-          <img className={styles.logo} src='/redditclonelogo.png' alt='logo' />
+    <nav className='fixed w-full h-20 shadow-xl bg-white flex justify-between items-center px-4 top-0'>
+      <div>
+        <Link href={'/'}>
+          <img
+            className='cursor:pointer'
+            src='/Logo.png'
+            alt='Logo'
+            width='60'
+            height='55'
+          />
         </Link>
       </div>
 
-      <div className={styles.navBar}>
-        <div className={styles.homeContainer}>
-          <Link className={styles.link} href={'/'}>
-            <img className={styles.home} src='/home.png' alt='home' />
-          </Link>
-        </div>
+      <div className='flex items-center gap-6 justify-center text-center'>
+        <Link href={'/'}>
+          <img className=' text-center text-slate-900 text-lg ' src='/Home.png' alt='Home' width='25' height='25' />
+        </Link>
 
-        <Link className={styles.link} href={'/navigation/subreddits'}>
+        <Link className='' href={'/subreddits'}>
           Subreddits
         </Link>
-        <Link className={styles.link} href={'/navigation/logout'}>
+        <Link className='' href={'/logout'}>
           Logout
         </Link>
       </div>
 
-      <div className={styles.navBtnContainer}>
-        <Link href='/navigation/login'>
-          <button className={styles.navBtn}>Login</button>
+      <div className=''>
+        <Link href='/login'>
+          <button className=''>Login</button>
         </Link>
-        <Link href='/navigation/register'>
-          <button className={styles.navBtn}>Register</button>
+        <Link href='/register'>
+          <button className=''>Register</button>
         </Link>
       </div>
     </nav>
