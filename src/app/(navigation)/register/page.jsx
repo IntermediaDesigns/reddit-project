@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation.js';
 import styles from '@/app/page.module.css';
