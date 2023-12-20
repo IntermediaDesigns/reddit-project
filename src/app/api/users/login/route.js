@@ -1,10 +1,10 @@
-import { prisma } from '@/lib/prisma.js';
+import { prisma } from '@/app/lib/prisma.js';
 import { NextResponse } from 'next/server.js';
 import { cookies } from 'next/headers';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
-export async function POST(req) {
+export async function POST(req, res) {
   try {
     const cookieStore = cookies();
     const { username, password } = await req.json();

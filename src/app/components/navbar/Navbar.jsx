@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
@@ -59,36 +59,46 @@ export default function Navbar() {
           >
             Subreddits
           </Link>
-          {isLoggedIn && (
-          <Link
-            className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
-            href={'/logout'}
-          >
-            Logout
-          </Link>
-        )}
+
+          
+            <Link
+              className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
+              href={'/logout'}
+            >
+              Logout
+            </Link>
+          
         </div>
 
         <div className=' flex md:flex sm:hidden'>
-        {!isLoggedIn && (
-          <>
-          <Link href='/login'>
-            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-              <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                Login
-              </span>
-            </button>
-          </Link>
-          <Link href='/register'>
-            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-              <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                Register
-              </span>
-            </button>
-          </Link>
-          </>
-        )}
+          {!isLoggedIn ? (
+            <>
+              <Link href='/login'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                    Login
+                  </span>
+                </button>
+              </Link>
+              <Link href='/register'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                    Register
+                  </span>
+                </button>
+              </Link>
+            </>
+          ) : (
+            <Link href='/logout'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                  Logout
+                </span>
+              </button>
+            </Link>
+          )}
         </div>
+
         <div
           onClick={handleNav}
           className='md:hidden lg:hidden xl:hidden 2xl:hidden cursor-pointer pl-24'
@@ -126,34 +136,42 @@ export default function Navbar() {
                 Subreddits
               </Link>
               <br />
-              {isLoggedIn && (
-              <Link
-                className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
-                onClick={() => handleLinkClick('/logout')}
-                href={'/logout'}
-              >
-                Logout
-              </Link>
-              )}
+              
+                <Link
+                  className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
+                  onClick={() => handleLinkClick('/logout')}
+                  href={'/logout'}
+                >
+                  Logout
+                </Link>
+              
             </div>
-            {!isLoggedIn && (
-          <>
-            <Link href='/login'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer' onClick={() => handleLinkClick('/login')}>
-                <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                  Login
-                </span>
-              </button>
-            </Link>
-            <Link href='/register'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer' onClick={() => handleLinkClick('/register')}>
-                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                  Register
-                </span>
-              </button>
-            </Link>
-            </>
-        )}
+            {!isLoggedIn ? (
+              <>
+                <Link href='/login'>
+                  <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                    <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                      Login
+                    </span>
+                  </button>
+                </Link>
+                <Link href='/register'>
+                  <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                    <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                      Register
+                    </span>
+                  </button>
+                </Link>
+              </>
+            ) : (
+              <Link href='/logout'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                    Logout
+                  </span>
+                </button>
+              </Link>
+            )}
           </div>
         </div>
       </nav>

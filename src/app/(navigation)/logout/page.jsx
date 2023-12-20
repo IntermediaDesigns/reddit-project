@@ -38,16 +38,16 @@ export default function Logout() {
       )}
       {logoutMessage && (
         <div>
-          <p>{logoutMessage}</p>
+          <p className={styles.errorText}>{logoutMessage}</p>
           {shouldShowButtons && (
             <div className={styles.logContainer}>
-              <Link className={styles.loginAgain} href='/login'>Log in again</Link>
-              <Link href='/'>Stay logged out</Link>
+              <Link className={styles.loginAgain} href='/login'>Login again?</Link>
+              <Link className={styles.loginAgain} href='/'>Go Home</Link>
             </div>
           )}
         </div>
       )}
-      {error && <p>{error}</p>}
+      {error && <p className={styles.errorText}>{error}</p>}
     </div>
   );
 }

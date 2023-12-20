@@ -17,7 +17,12 @@ export default function Register() {
       method: 'POST',
       body: JSON.stringify({ username, password }),
     });
-  
+  console.log(res)
+    const data = await res.json() 
+    if (data.error) {
+      return setError(data.error)
+    }
+
     router.push('/');
     router.refresh();
   }
