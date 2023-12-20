@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap');
 
 
-/*  Form */
+/* Login & Register Form */
 .main {
   background-color: #ffffff;
   width: 400px;
@@ -104,6 +104,13 @@ form.form1 {
   margin-bottom: 10px;
   font-family: 'Mina', sans-serif;
   color: rgb(38, 50, 56);
+}
+
+.here {
+  color: #58c7fd;
+}
+.here:hover {
+  color: tomato;
 }
 
 .formError {
@@ -214,4 +221,59 @@ form.form1 {
   margin-bottom: 2px;
   color: black;
   border-radius: 3px;
+}
+
+/*  Logout Page */
+.logoutContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ffffff;
+  width: 400px;
+  height: 400px;
+  margin: 7em auto;
+  border-radius: 1.5em;
+  box-shadow: 0px 11px 35px 2px rgba(0, 0, 0, 0.14);
+}
+
+.logoutTitle {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  color: #58c7fd;
+  font-family: 'Bungee Spice', sans-serif;
+  font-weight: bold;
+  font-size: 42px;
+  text-align: center;
+}
+.logoutBtn, .loginAgain {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5em;
+  color: #fff;
+  background: linear-gradient(to right, #25a8ea, lightblue);
+  border: 0;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  font-family: 'Mina', sans-serif;
+  font-size: 16px;
+  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+}
+
+.logoutBtn:hover, .loginAgain:hover {
+  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+  color: tomato;
+}
+
+.logoutImg {
+  padding-bottom: 40px;
+}
+
+.logContainer {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
 }

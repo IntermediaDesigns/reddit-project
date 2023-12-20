@@ -46,7 +46,7 @@ export default function Register() {
           Register
         </a>
         <p className={styles.formText}>
-          Already registered? <a href='/navigation/login'>Login Here</a>
+          Already registered? <a className={styles.here} href='/login'>Login Here</a>
         </p>
         <p className={styles.formError}>{error}</p>
       </form>
