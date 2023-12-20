@@ -42,9 +42,9 @@ export default function Register() {
           placeholder='Password'
           onChange={(e) => setPassword(e.target.value)}
         />
-        <a className={styles.submit} align='center'>
+        <button className={styles.submitBtn} align='center'>
           Register
-        </a>
+        </button>
         <p className={styles.formText}>
           Already registered? <a className={styles.here} href='/login'>Login Here</a>
         </p>

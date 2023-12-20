@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap');
 
-
 /* Login & Register Form */
 .main {
   background-color: #ffffff;
@@ -56,7 +55,7 @@ form.form1 {
   outline: none;
   box-sizing: border-box;
   border: 2px solid rgba(0, 0, 0, 0.02);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   margin-left: 46px;
   text-align: center;
   font-family: 'Mina', sans-serif;
@@ -67,7 +66,7 @@ form.form1 {
   border: 2px solid rgba(0, 0, 0, 0.18) !important;
 }
 
-.submit {
+.submitBtn {
   cursor: pointer;
   border-radius: 5em;
   color: #fff;
@@ -80,13 +79,15 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   margin-left: 35%;
   font-size: 16px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
+  transition: transform .4s;
 }
 
-.submit:hover {
+.submitBtn:hover {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: tomato;
   text-decoration: none;
+  transform:scale(1.1)
 }
 
 @media (max-width: 600px) {
@@ -100,8 +101,8 @@ form.form1 {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  margin-top: 25px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 5px;
   font-family: 'Mina', sans-serif;
   color: rgb(38, 50, 56);
 }
@@ -120,7 +121,6 @@ form.form1 {
   justify-content: center;
   font-family: 'Mina', sans-serif;
 }
-
 
 /*  Post Container */
 .profileContainer {
@@ -167,7 +167,6 @@ form.form1 {
   border: 1px solid gray;
   min-height: 150px;
   display: flex;
-
 }
 
 .postsVoteContainer {
@@ -191,19 +190,17 @@ form.form1 {
   background-color: transparent;
   cursor: pointer;
   transition: 0.3s ease-in;
-  
 }
 
 .clickVote:hover {
   transform: scale(1.1);
 }
-.commentsBtnContainer{
+.commentsBtnContainer {
   display: flex;
   align-items: flex-end;
-  
   margin-left: 5px;
 }
-.commentsBtn{
+.commentsBtn {
   color: gray;
   background-color: transparent;
   border: none;
@@ -212,6 +209,7 @@ form.form1 {
   height: 30px;
   width: 130px;
   margin-bottom: 2px;
+  transition:transform .4s;
 }
 
 .commentsBtn:hover {
@@ -221,6 +219,7 @@ form.form1 {
   margin-bottom: 2px;
   color: black;
   border-radius: 3px;
+  transform:scale(1.05)
 }
 
 /*  Logout Page */
@@ -245,7 +244,9 @@ form.form1 {
   font-size: 42px;
   text-align: center;
 }
-.logoutBtn, .loginAgain {
+.logoutBtn,
+.loginAgain,
+.subBtn {
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -259,12 +260,16 @@ form.form1 {
   padding-top: 10px;
   font-family: 'Mina', sans-serif;
   font-size: 16px;
-  box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
+  transition:transform .4s;
 }
 
-.logoutBtn:hover, .loginAgain:hover {
-  text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
+.logoutBtn:hover,
+.loginAgain:hover,
+.subBtn:hover {
+  text-shadow: 0 2px 4px 2px rgba(117, 117, 117, 0.12);
   color: tomato;
+  transform:scale(1.05)
 }
 
 .logoutImg {
@@ -276,4 +281,64 @@ form.form1 {
   align-items: center;
   gap: 20px;
   padding-bottom: 20px;
+}
+
+/* Subreddit Page */
+.mainSubContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.subBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 300px;
+  height: 100px;
+  margin: 1em auto 2em;
+  border-radius: 1.5em;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
+}
+
+.subredditContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  padding: 10px;
+  min-height: 100px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
+}
+
+.subredditTitle {
+  color: tomato;
+  font-family: 'Mina', sans-serif;
+  font-size: 20px;
+  width: auto;
+}
+
+.subredditTitle:hover {
+  color: #58c7fd;
+  cursor: pointer;
+}
+
+.subredditSnippet {
+  display: flex;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  text-wrap: wrap;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  font-family: 'Mina', sans-serif;
+  padding: 5px;
+}
+
+.subStats {
+  font-family: 'Mina', sans-serif;
+  font-size: 12px;
+  color: gray;
 }
