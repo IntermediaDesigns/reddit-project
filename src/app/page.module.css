@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap');
 
+
+/*  Form */
 .main {
   background-color: #ffffff;
   width: 400px;
@@ -112,6 +114,8 @@ form.form1 {
   font-family: 'Mina', sans-serif;
 }
 
+
+/*  Post Container */
 .profileContainer {
   display: flex;
   padding: 15px;
@@ -125,7 +129,7 @@ form.form1 {
   border: 1px solid gray;
   margin-left: 2rem;
   margin-right: 2rem;
-  margin-top: 1.5rem;
+  margin-top: 6rem;
   height: 60px;
   background-color: #ffffff;
 }

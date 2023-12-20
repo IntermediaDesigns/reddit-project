@@ -2,12 +2,19 @@
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const router = useRouter();
 
   const handleNav = () => {
     setMenuOpen(!menuOpen);
+  };
+
+  const handleLinkClick = (url) => {
+    router.push(url);
+    setMenuOpen(false);
   };
 
   return (
@@ -81,12 +88,17 @@ export default function Navbar() {
 
           <div className='flex flex-col items-center justify-center text-center text-wrap p-0 gap-1'>
             <div className='flex flex-col items-center mb-4 pb-1 gap-2'>
-              <Link className='active:border-b-tomato' href={'/'}>
+              <Link
+                className='active:border-b-tomato'
+                onClick={() => handleLinkClick('/')}
+                href={'/'}
+              >
                 <img src='/Home.png' alt='Home' width='30' />
               </Link>
               <br />
               <Link
                 className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
+                onClick={() => handleLinkClick('/subreddits')}
                 href={'/subreddits'}
               >
                 Subreddits
@@ -94,6 +106,7 @@ export default function Navbar() {
               <br />
               <Link
                 className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
+                onClick={() => handleLinkClick('/logout')}
                 href={'/logout'}
               >
                 Logout
@@ -101,14 +114,14 @@ export default function Navbar() {
             </div>
 
             <Link href='/login'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer' onClick={() => handleLinkClick('/login')}>
                 <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
                   Login
                 </span>
               </button>
             </Link>
             <Link href='/register'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer' onClick={() => handleLinkClick('/register')}>
                 <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
                   Register
                 </span>
