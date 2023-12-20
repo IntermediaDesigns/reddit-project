@@ -1,8 +1,8 @@
-import { prisma } from "@/lib/prisma.js";
-import { NextResponse } from "next/server.js";
-import { cookies } from "next/headers";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
+import { prisma } from '@/lib/prisma.js';
+import { NextResponse } from 'next/server.js';
+import { cookies } from 'next/headers';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 export async function POST(req) {
   try {
@@ -11,7 +11,7 @@ export async function POST(req) {
     if (!username || !password) {
       return NextResponse.json({
         success: false,
-        error: "You must provide a username and password to register",
+        error: 'You must provide a username and password to register',
       });
     }
     const _user = await prisma.user.findFirst({
@@ -20,7 +20,7 @@ export async function POST(req) {
     if (_user) {
       return NextResponse.json({
         success: false,
-        error: "Username already exists. Please login.",
+        error: 'Username already exists. Please login.',
       });
     }
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -31,7 +31,7 @@ export async function POST(req) {
       { userId: user.id, username },
       process.env.JWT_SECRET
     );
-    cookieStore.set("token", token);
+    cookieStore.set('token', token);
     return NextResponse.json({ success: true, user });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
