@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useRouter } from 'next/navigation.js';
 import { useState } from 'react';
 import styles from '@/app/page.module.css';
@@ -7,7 +7,7 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const [loginSuccess, setLoginSuccess] = useState(false);
   const router = useRouter();
 
   async function handleLogin(e) {
@@ -19,13 +19,19 @@ export default function Login() {
       },
       body: JSON.stringify({ username, password }),
     });
-  
+
     if (res.ok) {
       const data = await res.json();
       if (data.success) {
         document.cookie = `token=${data.token}; path=/`;
+
+        window.alert('You have successfully logged in!');
+
         router.push('/');
         router.refresh();
+
+        setLoginSuccess(true);
+        setTimeout(() => setLoginSuccess(false), 3000);
       } else {
         setError(data.error);
       }
@@ -34,7 +40,6 @@ export default function Login() {
       setError(errorData.error);
     }
   }
-  
 
   return (
     <div className={styles.main}>
@@ -65,6 +70,9 @@ export default function Login() {
         </p>
         <p className={styles.formError}>{error}</p>
       </form>
+      {loginSuccess && (
+        <div className={styles.alert}>You have successfully logged in!</div>
+      )}
     </div>
   );
 }

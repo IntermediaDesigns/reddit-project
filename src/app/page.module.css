@@ -350,3 +350,15 @@ form.form1 {
   font-size: 12px;
   color: gray;
 }
+
+/* Login alert*/
+.alert {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: green;
+  color: white;
+  padding: 1em;
+  border-radius: 5px;
+  margin: 1em;
+}
