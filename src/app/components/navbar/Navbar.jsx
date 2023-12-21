@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const router = useRouter();
 
   const handleNav = () => {
@@ -59,44 +59,33 @@ export default function Navbar() {
           >
             Subreddits
           </Link>
-
-          
-            <Link
-              className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
-              href={'/logout'}
-            >
-              Logout
-            </Link>
-          
         </div>
 
         <div className=' flex md:flex sm:hidden'>
-          {!isLoggedIn ? (
-            <>
-              <Link href='/login'>
-                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                  <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                    Login
-                  </span>
-                </button>
-              </Link>
-              <Link href='/register'>
-                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                  <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                    Register
-                  </span>
-                </button>
-              </Link>
-            </>
-          ) : (
-            <Link href='/logout'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                  Logout
-                </span>
-              </button>
-            </Link>
-          )}
+          <Link href='/login'>
+            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+              <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                Login
+              </span>
+            </button>
+          </Link>
+
+          <Link href='/register'>
+            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+              <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                Register
+              </span>
+            </button>
+          </Link>
+
+          <Link href='/logout'>
+            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+              <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                Logout
+              </span>
+            </button>
+          </Link>
+
         </div>
 
         <div
@@ -108,7 +97,7 @@ export default function Navbar() {
         <div
           className={
             menuOpen
-              ? 'fixed right-0 top-24 w-[30%] mr-5 md:hidden shadow-lg rounded-md h-72 bg-[white] p-3 ease-in duration-500'
+              ? 'fixed right-0 top-24 w-[30%] mr-5 md:hidden shadow-lg rounded-md h-80 bg-[white] p-3 ease-in duration-500'
               : 'fixed right-[-100%] top-24 p-3 ease-in duration-500'
           }
         >
@@ -118,8 +107,8 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className='flex flex-col items-center justify-center text-center text-wrap p-0 gap-1'>
-            <div className='flex flex-col items-center mb-4 pb-1 gap-2'>
+          <div className='flex flex-col items-center justify-center text-center'>
+            <div className='flex flex-col items-center gap-2'>
               <Link
                 className='active:border-b-tomato'
                 onClick={() => handleLinkClick('/')}
@@ -127,54 +116,44 @@ export default function Navbar() {
               >
                 <img src='/Home.png' alt='Home' width='30' />
               </Link>
-              <br />
-              <Link
-                className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
-                onClick={() => handleLinkClick('/subreddits')}
-                href={'/subreddits'}
-              >
-                Subreddits
-              </Link>
-              <br />
-              
-                <Link
-                  className=' font-mina text-slate-900 hover:text-tomato active:text-tomato'
-                  onClick={() => handleLinkClick('/logout')}
-                  href={'/logout'}
-                >
+                            
+            
+            <Link href='/subreddits'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-2 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                  Subreddits
+                </span>
+              </button>
+            </Link>
+
+            <Link href='/login'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                  Login
+                </span>
+              </button>
+            </Link>
+
+            <Link href='/register'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                  Register
+                </span>
+              </button>
+            </Link>
+
+            <Link href='/logout'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
                   Logout
-                </Link>
-              
+                </span>
+              </button>
+            </Link>
             </div>
-            {!isLoggedIn ? (
-              <>
-                <Link href='/login'>
-                  <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                    <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                      Login
-                    </span>
-                  </button>
-                </Link>
-                <Link href='/register'>
-                  <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                    <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                      Register
-                    </span>
-                  </button>
-                </Link>
-              </>
-            ) : (
-              <Link href='/logout'>
-                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                  <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                    Logout
-                  </span>
-                </button>
-              </Link>
-            )}
           </div>
         </div>
       </nav>
+
       {menuOpen && (
         <div className='fixed inset-0 backdrop-blur-sm bg-black/20 z-10'></div>
       )}
