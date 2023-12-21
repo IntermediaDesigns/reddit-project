@@ -2,38 +2,41 @@
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Cookies from 'js-cookie';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
 
+  const searchParams = useSearchParams();
+  const isLoggedIn = searchParams.get('isLoggedIn')
+  console.log(isLoggedIn)
+
   const handleLinkClick = () => {
     const token = Cookies.get('token');
     if (!token) {
-      setIsLoggedIn(false);
-      setTimeout(() => {
-        router.push('/'); 
-        router.refresh();
-      }, 500); 
+
+      // setIsLoggedIn(false);
+      router.push('/');
     } else if (!token) {
-      setIsLoggedIn(true);      
+      // setIsLoggedIn(true); 
+      router.push('/');   
     }
-    router.push('/'); 
-    router.refresh();
+    
+
     setMenuOpen(false);
   };
 
   useEffect(() => {
     const token = Cookies.get('token');
-    setIsLoggedIn(!!token);
-
+    // setIsLoggedIn(!!token);
+    console.log(token)
     const handleResize = () => {
       if (window.innerWidth > 768 && menuOpen) {
         setMenuOpen(false);

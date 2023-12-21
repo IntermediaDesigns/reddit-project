@@ -28,7 +28,7 @@ export default function Login() {
         setLoginSuccess(true);
       setTimeout(() => {
         setLoginSuccess(false); 
-        router.push('/'); 
+        router.push('/?isLoggedIn=true'); 
         router.refresh();
       }, 1500); 
       } else {

@@ -23,7 +23,7 @@ export default function Register() {
       return setError(data.error)
     }
 
-    router.push('/');
+    router.push('/?isLoggedIn=true');
     router.refresh();
   }
 
