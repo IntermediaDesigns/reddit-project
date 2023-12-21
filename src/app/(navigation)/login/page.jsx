@@ -61,6 +61,7 @@ export default function Login() {
           className={styles.password}
           value={password}
           placeholder='Password'
+          type='password'
           onChange={(e) => setPassword(e.target.value)}
           onFocus={clearError}
         />

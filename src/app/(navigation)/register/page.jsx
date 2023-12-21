@@ -43,6 +43,7 @@ export default function Register() {
           className={styles.password}
           value={password}
           placeholder='Password'
+          type='password'
           onChange={(e) => setPassword(e.target.value)}
         />
         <button className={styles.submitBtn} align='center'>
