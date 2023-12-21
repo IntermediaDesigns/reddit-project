@@ -30,7 +30,7 @@ export default function Login() {
         setLoginSuccess(false); 
         router.push('/'); 
         router.refresh();
-      }, 2000); 
+      }, 1500); 
       } else {
         setError(data.error);
       }

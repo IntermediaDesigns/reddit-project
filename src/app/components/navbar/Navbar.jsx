@@ -1,4 +1,5 @@
 'use client';
+import jwt from 'jsonwebtoken';
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useState, useEffect } from 'react';
@@ -6,8 +7,8 @@ import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleNav = () => {
     setMenuOpen(!menuOpen);
@@ -27,11 +28,23 @@ export default function Navbar() {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup function
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, [menuOpen]);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      jwt.verify(token, (err) => {
+        if (err) {
+          setIsLoggedIn(false);
+        } else {
+          setIsLoggedIn(true);
+        }
+      });
+    }
+  }, []);
 
   return (
     <>
@@ -61,31 +74,36 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <div className=' flex md:flex sm:hidden'>
-          <Link href='/login'>
-            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-              <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                Login
-              </span>
-            </button>
-          </Link>
+        <div className={`flex md:flex sm:hidden `}>
+          {!isLoggedIn && (
+            <>
+              <Link href='/login'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                    Login
+                  </span>
+                </button>
+              </Link>
 
-          <Link href='/register'>
-            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-              <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                Register
-              </span>
-            </button>
-          </Link>
+              <Link href='/register'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                    Register
+                  </span>
+                </button>
+              </Link>
+            </>
+          )}
 
-          <Link href='/logout'>
-            <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-              <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                Logout
-              </span>
-            </button>
-          </Link>
-
+          {isLoggedIn && (
+            <Link href='/logout'>
+              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                  Logout
+                </span>
+              </button>
+            </Link>
+          )}
         </div>
 
         <div
@@ -116,39 +134,44 @@ export default function Navbar() {
               >
                 <img src='/Home.png' alt='Home' width='30' />
               </Link>
-                            
-            
-            <Link href='/subreddits'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-2 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                  Subreddits
-                </span>
-              </button>
-            </Link>
 
-            <Link href='/login'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
-                  Login
-                </span>
-              </button>
-            </Link>
+              <Link href='/subreddits'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-2 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                    Subreddits
+                  </span>
+                </button>
+              </Link>
 
-            <Link href='/register'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                  Register
-                </span>
-              </button>
-            </Link>
+              <Link href='/login'>
+                <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                  <span className='block text-black px-6 py-2 font-semibold rounded-full bg-white'>
+                    Login
+                  </span>
+                </button>
+              </Link>
 
-            <Link href='/logout'>
-              <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
-                <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
-                  Logout
-                </span>
-              </button>
-            </Link>
+              {!isLoggedIn && (
+                <>
+                  <Link href='/register'>
+                    <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
+                      <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                        Register
+                      </span>
+                    </button>
+                  </Link>
+                </>
+              )}
+
+              {isLoggedIn && (
+                <Link href='/logout'>
+                  <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer '>
+                    <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
+                      Logout
+                    </span>
+                  </button>
+                </Link>
+              )}
             </div>
           </div>
         </div>
