@@ -25,13 +25,12 @@ export default function Login() {
       if (data.success) {
         document.cookie = `token=${data.token}; path=/`;
 
-        window.alert('You have successfully logged in!');
-
-        router.push('/');
-        router.refresh();
-
         setLoginSuccess(true);
-        setTimeout(() => setLoginSuccess(false), 3000);
+      setTimeout(() => {
+        setLoginSuccess(false); 
+        router.push('/'); 
+        router.refresh();
+      }, 2000); 
       } else {
         setError(data.error);
       }
@@ -39,6 +38,10 @@ export default function Login() {
       const errorData = await res.json();
       setError(errorData.error);
     }
+  }
+
+  function clearError() {
+    setError('');
   }
 
   return (
@@ -52,12 +55,14 @@ export default function Login() {
           value={username}
           placeholder='Username'
           onChange={(e) => setUsername(e.target.value)}
+          onFocus={clearError}
         />
         <input
           className={styles.password}
           value={password}
           placeholder='Password'
           onChange={(e) => setPassword(e.target.value)}
+          onFocus={clearError}
         />
         <button className={styles.submitBtn} align='center'>
           Login
