@@ -7,15 +7,16 @@ export async function fetchUser() {
     const cookieStore = cookies();
     const userCookie = cookieStore.get('token');
     if (!userCookie) {
-      return {};
+      return { user: {}, token: null };
     }
     const decodedToken = jwt.verify(userCookie.value, process.env.JWT_SECRET);
     const { userId } = decodedToken;
     const user = await prisma.user.findFirst({ where: { id: userId } });
     delete user.password;
-    return user;
+    return { user, token: userCookie.value };
   } catch (error) {
     console.log(error);
-    return {};
+    return { user: {}, token: null };
   }
 }
+
