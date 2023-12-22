@@ -315,9 +315,9 @@ form.form1 {
   justify-content: center;
   padding: 15px 30px;
   background-color: #ffffff;
-  width: 60%;
+  width: auto;
   height: 70px;
-  margin: 1em auto 2em;
+  margin: 1em 2rem 2em;
   border-radius: 1.5em;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
 }
@@ -330,7 +330,6 @@ form.form1 {
 
 .formTitle {
   display: flex;
-  
   font-family: 'Mina', sans-serif;
   font-size: 20px;
   font-weight: 700;
@@ -340,19 +339,28 @@ form.form1 {
 .formInput {
   display: flex;
   align-items: center;
+  font-family: 'Mina', sans-serif;
+  color: black;
+  font-size: 18px;
 }
 
+.label {
+  font-family: 'Mina', sans-serif;
+  font-size: 18px;
+  letter-spacing: .06em;
+  color: #ff6347;
+}
 .input {
   font-family: 'Mina', sans-serif;
-  font-size: 20px;
-  font-weight: 700;
+  font-size: 16px;
   letter-spacing: .06em;
-  margin-right: 40px;
+  margin-right: 50px;
   margin-left: 10px;
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 5px;
 }
+
 .formBtn {
   display: flex;
   cursor: pointer;

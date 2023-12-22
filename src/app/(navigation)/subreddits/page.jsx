@@ -15,19 +15,19 @@ export default async function Subreddits() {
         <SubredditForm />
       </div>
 
-      <div className={styles.subredditContainer}>
-        <img
-          className={styles.redditLogo}
-          src='/reddit.png'
-          alt='Home'
-          width='40'
-        />
-        {subreddits.map((subreddit) => (
-          <div className={styles.subredditPostTitle} key={subreddit.id}>
-            <Link href={`/subreddits/${subreddit.id}`}>{subreddit.name}</Link>
+      {subreddits.map((subreddit) => (
+        <div className={styles.subredditContainer} key={subreddit.id}>
+          <img
+            className={styles.redditLogo}
+            src='/reddit.png'
+            alt='Home'
+            width='40'
+          />
+          <div className={styles.subredditPostTitle}>
+            <Link href={`/subreddits/${subreddit.id}`}>r/{subreddit.name}</Link>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
