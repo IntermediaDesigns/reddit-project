@@ -70,7 +70,7 @@ export default function Navbar() {
             <img src='/Home.png' alt='Home' width='30' />
           </Link>
 
-          <Link href='subreddits'>
+          <Link href='/subreddits'>
             <button className='flex justify-center items-center w-26 text-slate-900 font-mina text-sm leading-5 m-1 p-1 rounded-full shadow-md from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r hover:bg-radial-gradient  cursor-pointer'>
               <span className='block text-black px-4 py-2 font-semibold rounded-full bg-white'>
                 Subreddits

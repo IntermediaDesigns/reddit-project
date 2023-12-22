@@ -26,24 +26,26 @@ model Post {
   userId      String
   subredditId String
   votes       Vote[]
-  parent      Post?     @relation("post", fields: [parentId], references: [id])
+  parent      Post?     @relation("post", fields: [parentId], references: [id], onDelete: Cascade)
   children    Post[]    @relation("post")
   parentId    String?
+  createdAt   DateTime  @default(now())
 }
 
 model Subreddit {
-  id     String @id @default(uuid())
-  name   String @unique
-  user   User   @relation(fields: [userId], references: [id])
-  userId String
-  posts  Post[]
+  id        String   @id @default(uuid())
+  name      String   @unique
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  posts     Post[]
 }
 
 model Vote {
   id       String  @id @default(uuid())
   user     User    @relation(fields: [userId], references: [id])
   userId   String
-  post     Post    @relation(fields: [postId], references: [id])
+  post     Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
   postId   String
   isUpvote Boolean
 }
