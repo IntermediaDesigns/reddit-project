@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap');
 
-
 /* Login & Register Form */
 .main {
   background-color: #ffffff;
@@ -81,14 +80,14 @@ form.form1 {
   margin-left: 35%;
   font-size: 16px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
-  transition: transform .4s;
+  transition: transform 0.4s;
 }
 
 .submitBtn:hover {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: tomato;
   text-decoration: none;
-  transform:scale(1.1)
+  transform: scale(1.1);
 }
 
 @media (max-width: 600px) {
@@ -212,7 +211,7 @@ form.form1 {
   height: 30px;
   width: 130px;
   margin-bottom: 2px;
-  transition:transform .4s;
+  transition: transform 0.4s;
 }
 
 .commentsBtn:hover {
@@ -222,7 +221,7 @@ form.form1 {
   margin-bottom: 2px;
   color: black;
   border-radius: 3px;
-  transform:scale(1.05)
+  transform: scale(1.05);
 }
 
 /*  Logout Page */
@@ -265,7 +264,7 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   font-size: 16px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
-  transition:transform .4s;
+  transition: transform 0.4s;
 }
 
 .logoutBtn:hover,
@@ -273,7 +272,7 @@ form.form1 {
 .subBtn:hover {
   text-shadow: 0 2px 4px 2px rgba(117, 117, 117, 0.12);
   color: tomato;
-  transform:scale(1.05)
+  transform: scale(1.05);
 }
 
 .logoutImg {
@@ -315,9 +314,12 @@ form.form1 {
   justify-content: center;
   padding: 15px 30px;
   background-color: #ffffff;
-  max-width: 100%;
+  width: 900px;
   height: 100px;
-  margin: 1em 2rem 2em;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  margin-left: auto;
+  margin-right: auto;
   border-radius: 1.5em;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
 }
@@ -336,8 +338,8 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  text-align:left;
-  letter-spacing: .06em;
+  text-align: left;
+  letter-spacing: 0.06em;
 }
 .formInput {
   display: flex;
@@ -345,26 +347,23 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   color: black;
   font-size: 18px;
-  
 }
 
 .label {
   font-family: 'Mina', sans-serif;
   font-size: 18px;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   color: #ff6347;
-  margin-left: auto;
 }
 .input {
   font-family: 'Mina', sans-serif;
   font-size: 16px;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   margin-right: 50px;
   margin-left: 10px;
   border: 1px solid lightgray;
   border-radius: 5px;
   padding: 5px;
- 
 }
 
 .formBtn {
@@ -378,7 +377,7 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   font-size: 16px;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
-  transition: transform .4s;
+  transition: transform 0.4s;
   margin-left: 40px;
 }
 
@@ -386,7 +385,7 @@ form.form1 {
   text-shadow: 0px 0px 3px rgba(117, 117, 117, 0.12);
   color: tomato;
   text-decoration: none;
-  transform:scale(1.1)
+  transform: scale(1.1);
 }
 
 @media (min-width: 400px) and (max-width: 1060px) {
@@ -408,6 +407,7 @@ form.form1 {
     height: auto;
     margin-left: auto;
     margin-right: auto;
+    width: 400px;
   }
   .form {
     display: flex;
@@ -421,38 +421,34 @@ form.form1 {
     font-family: 'Mina', sans-serif;
     font-size: 20px;
     font-weight: 700;
-    text-align:left;
-    letter-spacing: .06em;
-    
+    text-align: left;
+    letter-spacing: 0.06em;
   }
   .formInput {
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     text-align: center;
     font-family: 'Mina', sans-serif;
     color: black;
-    font-size: 18px;
-    
+    font-size: 16px;
   }
   .label {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    margin-left: 10px;
+    text-align: left;
     font-family: 'Mina', sans-serif;
     font-size: 18px;
-    letter-spacing: .06em;
+    letter-spacing: 0.06em;
     color: #ff6347;
   }
   .input {
     display: flex;
     align-items: center;
-    justify-content: center;
+    
     font-family: 'Mina', sans-serif;
     font-size: 16px;
-    letter-spacing: .06em;
+    letter-spacing: 0.06em;
     width: 100%;
     margin-bottom: 20px;
     border: 1px solid lightgray;
@@ -461,6 +457,8 @@ form.form1 {
   }
   .formBtn {
     display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
@@ -470,7 +468,7 @@ form.form1 {
     font-family: 'Mina', sans-serif;
     font-size: 16px;
     box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
-    transition: transform .4s;
+    transition: transform 0.4s;
   }
 }
 .subredditContainer {
@@ -495,7 +493,6 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   font-size: 20px;
   width: auto;
-  
 }
 
 .subredditPostTitle:hover {
@@ -514,11 +511,9 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   font-size: 20px;
   font-weight: 700;
-  letter-spacing: .06em;
+  letter-spacing: 0.06em;
   padding-bottom: 10px;
 }
-
-
 
 .subredditSnippet {
   display: flex;
@@ -553,7 +548,7 @@ form.form1 {
   position: fixed;
   bottom: 0;
   right: 0;
-  background: radial-gradient(circle at center, #ff6347 , #f2d039);
+  background: radial-gradient(circle at center, #ff6347, #f2d039);
   color: white;
   padding: 1em;
   border-radius: 10px;

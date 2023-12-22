@@ -55,8 +55,8 @@ export default function SubredditForm() {
         :
         <form className={styles.formInput} method="POST" action="/api/subreddits" onSubmit={submitForm}>
           <div>
-            <label className={styles.label}>Community Subreddit Name</label>
-            <input className={styles.input} type="text" name="name" required onChange={handleInput} value={formData.name} />
+            <label className={styles.label}>Subreddit Name</label>
+            <input className={styles.input} type="text" name="name" required onChange={handleInput} value={formData.name} placeholder="Enter Subreddit Name.." />
           </div>
 
           <button className={styles.formBtn} type="submit">Create</button>
