@@ -6,7 +6,8 @@ export default function Home() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.createPostContainer}>
-        <div className={styles.profileContainer}>👤</div>
+        <div className={styles.profileContainer}><img src='/profile.png' alt='profile'
+        width={50}/></div>
         <div className={styles.CreatePostInputContainer}>
           <input
             className={styles.createPostInput}

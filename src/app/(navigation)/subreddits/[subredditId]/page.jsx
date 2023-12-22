@@ -1,39 +1,50 @@
-// import styles from '@/app/page.module.css';
-// import Link from 'next/link.js';
-// import { prisma } from '@/app/lib/prisma.js';
-// export default async function SubredditPosts({ params }) {
-//   const subreddits = await prisma.subreddit.findMany();
-//   console.log(params);
+import styles from '@/app/page.module.css';
+import { prisma } from '@/app/lib/prisma.js';
 
-//   return (
-//     <div className={styles.mainSubContainer}>
-//       <div className={styles.subBtnContainer}>
-//         <button className={styles.subBtn}>Create Subreddit</button>
-//       </div>
+export default async function SubredditPosts({ params }) {
+  const { subredditId } = params;
+  const subreddits = await prisma.subreddit.findMany();
 
-//       <div className={styles.subredditContainer}>
-//         {subreddits.map((subreddit) => (
-//           <div className={styles.subredditTitle} key={subreddit.id}>
-//             {subreddit.name}
-//           </div>
-//         ))}
-//         <div className={styles.subredditSnippet}>
-//           Post - Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sed
-//           consequatur repellat, praesentium reiciendis eum deleniti voluptate.
-//           Autem quidem quis dolore!
-//         </div>
+  const posts = await prisma.post.findMany({
+    where: { subredditId: subredditId },
+    include: { subreddit: true },
+  });
 
-//         <div className={styles.subStats}># of Users Subscribed</div>
-//       </div>
-//     </div>
-//   );
-// }
+  return (
+    <div className={styles.mainSubContainer}>
+      
+      <p className={styles.subredditTitle}>Subreddits</p>
+      
+      <div className={styles.subredditContainer}>
+        <div className={styles.subProfileContainer}>
+          <img src='/profile.png' alt='profile' width={50} />
 
-export default function SubredditId({ params }) {
-       // i want to show the posts associated with this subreddit
-     
-       // how do i access that parameter?
-       console.log(params);
-       return <div>Subreddit</div>;
-     }
-     
+          {subreddits.map((subreddit) => (
+            <div key={subreddit.id} className={styles.subStats}>
+              {subreddit.createdAt.toLocaleString()}
+            </div>
+          ))}
+        </div>
+
+        {Array.isArray(posts) &&
+          posts.map((post) => (
+            post.subreddit.name === subredditId && (
+            <div key={post.id}>
+              
+              <div className={styles.subredditName}>r/{post.subreddit.name}</div>
+              <div className={styles.subPostTitle}>
+              {post.title}</div>
+              <div>{post.user}</div>
+              <div className={styles.subredditSnippet}>
+                <div>{post.message}</div>
+              </div>
+              <div className={styles.subStats}>Post Created: {post.createdAt.toLocaleString()}</div>
+            </div>
+            )
+          ))}
+      </div>
+    </div>
+  );
+}
+
+
