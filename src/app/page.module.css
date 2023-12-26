@@ -188,7 +188,7 @@ form.form1 {
   flex-direction: column;
   height: auto;
   width: 30px;
-  padding: 10px 5px;
+  padding: 2px 5px;
   color: rgb(27, 26, 26);
   text-align: center;
   font-weight: 700;
@@ -211,21 +211,34 @@ form.form1 {
 
 .innerPostContainer{
   display: flex;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
   
+}
+
+.titlePostContainer{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
 }
 .postTitle {
   display: flex;
   align-items: center;
   margin-left: 10px;
-  margin-top: 10px;
-  margin-bottom: 5px;
   font-family: 'Mina', sans-serif;
   font-size: 20px;
   font-weight: 700;
   text-align: left;
   letter-spacing: 0.06em;
+}
+
+.subredditPostName {
+  font-family: 'Mina', sans-serif;
+  font-size: 18px;
+  color: tomato;
+  margin-right: 15px;
 }
 
 .postUsername {
@@ -236,8 +249,13 @@ form.form1 {
   text-align: left;
   color: #25a8ea;
   margin-left: 10px;
-  margin-top: 10px;
   margin-bottom: 5px;
+  font-style: italic;
+}
+.postedBy {
+  font-style: normal;
+  color: black;
+  margin-right: 5px;
 }
 
 .post {
@@ -250,34 +268,37 @@ form.form1 {
   height: auto;
   padding: 5px 10px;
 }
-.commentsBtnContainer {
+.statContainer {
   display: flex;
-  align-content: flex-end;
-  justify-content: flex-end;
-  align-items: flex-start;
+  align-items: center;  
+  justify-content: space-between;
   margin-left: 5px;
+  margin-right: 5px;
+  width: 100%;
 }
-.commentsBtn {
+
+.commentsStat {
   color: gray;
   background-color: transparent;
   border: none;
   font-size: 14px;
   word-spacing: 5px;
   height: 30px;
-  width: 130px;
   margin-bottom: 2px;
-  transition: transform 0.4s;
 }
 
-.commentsBtn:hover {
-  background-color: #f7772d;
+.dateStat {
+  color: gray;
+  background-color: transparent;
+  border: none;
+  font-size: 14px;
+  word-spacing: 5px;
   height: 30px;
-  width: 130px;
   margin-bottom: 2px;
-  color: black;
-  border-radius: 3px;
-  transform: scale(1.05);
+  margin-right: 15px;
 }
+
+
 
 /*  Logout Page */
 .logoutContainer {

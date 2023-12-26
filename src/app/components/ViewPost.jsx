@@ -1,13 +1,11 @@
+import React from 'react'
 import styles from '@/app/page.module.css';
+import './globals.css';
 import { prisma } from '@/app/lib/prisma.js';
-export default async function postIdPage() {
-       
-       const posts = await prisma.post.findMany();
-       console.log(posts);
-     
-       
-     
-       return (
+
+export default function ViewPost() {
+
+  return (
          <div className={styles.mainContainer}>
            <p className={styles.mainRedditTitle}>Reddit</p>
            <div className={styles.createPostContainer}>
@@ -52,22 +50,13 @@ export default async function postIdPage() {
      
                  <div className={styles.post}>{post.message}</div>
      
-                 <div className={styles.statContainer}>
-              
-              <div>
-                <p className={styles.commentsStat}>💬 # Comments</p>
-              </div>
-
-              <div>
-                <p className={styles.dateStat}>
-                  Created: {post.createdAt.toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-
+                 <div className={styles.commentsBtnContainer}>
+                   <button className={styles.commentsBtn}>💬 # Comments</button>
+                 </div>
                </div>
              </div>
            ))}
          </div>
        );
-     }
+}
+

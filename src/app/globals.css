@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 * body {
-  margin: 6rem 0 0 0;
+  margin: 6rem 0 2rem 0;
   padding: 0;
   background-color: #58c7fd;
 }

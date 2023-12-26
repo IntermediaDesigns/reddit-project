@@ -20,32 +20,42 @@ export default function SubredditForm() {
     }));
   }
 
-  const submitForm = (e) => {
-    e.preventDefault()
-
-    const formURL = e.target.action
-    const data = new FormData()
-
-    Object.entries(formData).forEach(([key, value]) => {
-      data.append(key, value);
-    })
-
-    fetch(formURL, {
-      method: "POST",
-      body: data,
-      headers: {
-        'accept': 'application/json',
-      },
-    }).then((response) => response.json())
-    .then((data) => {
-      setFormData({
-        name: "",
-      })
-
-      setFormSuccess(true)
-      setFormSuccessMessage(data.submission_text)
-    })
-  }
+  const submitForm = async (e) => {
+    e.preventDefault();
+  
+    const formURL = e.target.action;
+  
+    try {
+      const response = await fetch(formURL, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+  
+        await prisma.subreddit.create({
+          data: {
+            name: data.name,
+          },
+        });
+  
+        setFormData({
+          name: "",
+        });
+  
+        setFormSuccess(true);
+        setFormSuccessMessage(data.submission_text);
+      } else {
+        // Handle error response
+      }
+    } catch (error) {
+      // Handle fetch or Prisma error
+    }
+  };
 
   return (
     <div className={styles.form}>
@@ -56,7 +66,7 @@ export default function SubredditForm() {
         <form className={styles.formInput} method="POST" action="/api/subreddits" onSubmit={submitForm}>
           <div>
             <label className={styles.label}>Subreddit Name</label>
-            <input className={styles.input} type="text" name="name" required onChange={handleInput} value={formData.name} placeholder="Enter Subreddit Name.." />
+            <input className={styles.input} type="text" name="name" onChange={handleInput} value={formData.name} placeholder="Enter Subreddit Name.." required />
           </div>
 
           <button className={styles.formBtn} type="submit">Create</button>

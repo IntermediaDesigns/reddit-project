@@ -2,13 +2,11 @@ import styles from '@/app/page.module.css';
 import './globals.css';
 import { prisma } from '@/app/lib/prisma.js';
 import Link from 'next/link.js';
-import PostVote from './components/PostVote.jsx';
 
 export default async function Home() {
-  const posts = await prisma.post.findMany();
-  console.log(posts);
-
-  
+  const posts = await prisma.post.findMany({
+    include: { user: true, subreddit: true },
+  });
 
   return (
     <div className={styles.mainContainer}>
@@ -29,34 +27,40 @@ export default async function Home() {
       {posts.map((post) => (
         <div className={styles.postsContainer} key={post.id}>
           <div className={styles.postsVoteContainer}>
-          <div className={styles.postsVoteContainer} key={post.id}>
-          <button
-            className={styles.clickVote}
-          >
-            ⬆️
-          </button>
-          {post.votes || 0}
-          <button
-            className={styles.clickVote}
-          >
-            ⬇️
-          </button>
-        </div>
+            <div className={styles.postsVoteContainer} key={post.id}>
+              <button className={styles.clickVote}>⬆️</button>
+              {post.votes || 0}
+              <button className={styles.clickVote}>⬇️</button>
+            </div>
           </div>
 
           <div className={styles.innerPostContainer}>
-            <div className={styles.postTitle}>
-              <Link href={`/posts/${post.id}`}>{post.title}</Link>
+            <div className={styles.titlePostContainer}>
+              <div className={styles.postTitle}>
+                <Link href={`/posts/${post.id}`}>{post.title}</Link>
+              </div>
+
+              <p className={styles.subredditPostName}>
+                r/ {post.subreddit && post.subreddit.name}{' '}
+              </p>
             </div>
 
             {post.user && (
-              <div className={styles.postUsername}>{post.user.username}</div>
+              <div className={styles.postUsername} ><span className={styles.postedBy}>Posted By: </span>{post.user.username}</div>
             )}
 
             <div className={styles.post}>{post.message}</div>
 
-            <div className={styles.commentsBtnContainer}>
-              <button className={styles.commentsBtn}>💬 # Comments</button>
+            <div className={styles.statContainer}>
+              <div>
+                <p className={styles.commentsStat}>💬 # Comments</p>
+              </div>
+
+              <div>
+                <p className={styles.dateStat}>
+                  Created: {post.createdAt.toLocaleDateString()}
+                </p>
+              </div>
             </div>
           </div>
         </div>
