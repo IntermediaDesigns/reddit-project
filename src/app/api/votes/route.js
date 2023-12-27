@@ -1,4 +1,3 @@
-// Server-side code
 import { prisma } from '@/app/lib/prisma.js';
 
 export default async function handleVote(postId, voteType) {

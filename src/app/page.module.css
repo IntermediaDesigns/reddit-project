@@ -90,11 +90,7 @@ form.form1 {
   transform: scale(1.1);
 }
 
-@media (max-width: 600px) {
-  .main {
-    border-radius: 0px;
-  }
-}
+
 
 .formText {
   display: flex;
@@ -238,6 +234,7 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   font-size: 18px;
   color: tomato;
+  text-align: right;
   margin-right: 15px;
 }
 
@@ -550,17 +547,22 @@ form.form1 {
 .subredditContainer {
   display: flex;
   align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
   background-color: #ffffff;
   margin: 1rem 2rem;
   border-radius: 5px;
   padding: 10px;
-  height: auto;
   box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
 }
 
-.redditLogo {
+.subInnerContainer {
   display: flex;
+  flex-direction: row;
   align-items: center;
+}
+
+.redditLogo {
   margin: 2px 15px 2px 5px;
 }
 
@@ -568,7 +570,7 @@ form.form1 {
   color: #ff6347;
   font-family: 'Mina', sans-serif;
   font-size: 20px;
-  width: auto;
+  text-wrap: wrap;
 }
 
 .subredditPostTitle:hover {
@@ -580,7 +582,11 @@ form.form1 {
   color: #ff6347;
   font-family: 'Mina', sans-serif;
   font-size: 24px;
-  width: auto;
+}
+
+.numberPosts{
+  font-family: 'Mina', sans-serif;
+  font-size: 16px;
 }
 
 .subPostTitle {
@@ -589,6 +595,10 @@ form.form1 {
   font-weight: 700;
   letter-spacing: 0.06em;
   padding-bottom: 10px;
+}
+
+.subPostTitle:hover {
+  color: tomato;
 }
 
 .subredditSnippet {
@@ -600,6 +610,7 @@ form.form1 {
   margin-bottom: 1rem;
   font-family: 'Mina', sans-serif;
   padding: 5px;
+  width: 100%;
 }
 
 .subProfileContainer {
@@ -618,6 +629,56 @@ form.form1 {
   font-size: 12px;
   color: gray;
 }
+
+/* Subreddit Id Page*/
+.subredditMainContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #ffffff;
+  margin: 1rem 2rem;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
+}
+
+.subPostMainContainer{
+  width: 100%;
+}
+.subredditPostUsername {
+  display: flex;
+  align-items: center;
+  font-family: 'Mina', sans-serif;
+  font-size: 14px;
+  text-align: left;
+  color: #25a8ea;
+  font-style: italic;
+}
+
+.viewMore {
+  color: tomato;
+  font-family: 'Mina', sans-serif;
+  font-size: 14px;
+}
+
+.viewMore:hover {
+  color:#25a8ea;
+}
+
+.subredditSubStats {
+  display: flex;
+  font-family: 'Mina', sans-serif;
+}
+
+.subredditPostedBy {
+  display: flex;
+  font-family: 'Mina', sans-serif;
+  font-style: normal;
+  color: black;
+  margin-right: 5px;
+}
+
 
 /* Login alert*/
 .alert {
