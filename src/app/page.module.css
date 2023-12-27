@@ -230,6 +230,10 @@ form.form1 {
   letter-spacing: 0.06em;
 }
 
+.postTitle:hover{
+  color: tomato;
+}
+
 .subredditPostName {
   font-family: 'Mina', sans-serif;
   font-size: 18px;

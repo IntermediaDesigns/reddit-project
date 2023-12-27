@@ -2,7 +2,7 @@ import styles from '@/app/page.module.css';
 import { prisma } from '@/app/lib/prisma.js';
 export default async function postIdPage() {
        
-       const posts = await prisma.post.findMany();
+       const posts = await prisma.post.findFirst();
        console.log(posts);
      
        
