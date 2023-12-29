@@ -2,12 +2,13 @@ import styles from '@/app/page.module.css';
 import './globals.css';
 import { prisma } from '@/app/lib/prisma.js';
 import Link from 'next/link.js';
-import getTotalComments from './components/getTotalComments.jsx';
+import getTotalComments from './components/getTotalComments.js';
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
     where: { parentId: null },
     include: { user: true, subreddit: true, children: true },
+    orderBy: { createdAt: 'desc' },
   });
 
   const postsWithTotalComments = await Promise.all(
@@ -51,7 +52,7 @@ export default async function Home() {
                 </div>
 
                 <p className={styles.subredditPostName}>
-                  r/ {post.subreddit && post.subreddit.name}{' '}
+                  r/ {post.subreddit && post.subreddit.name}
                 </p>
               </div>
 
