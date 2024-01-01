@@ -5,7 +5,7 @@ export async function GET(request, response) {
   try {
     const { postId } = response.params;
 
-    const post = await prisma.post.findFirst({
+    const post = await prisma.post.findMany({
       where: { id: postId },
     });
 

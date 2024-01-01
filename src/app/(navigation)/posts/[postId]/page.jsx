@@ -2,6 +2,8 @@ import styles from '@/app/page.module.css';
 import { prisma } from '@/app/lib/prisma.js';
 import { HiXCircle } from 'react-icons/hi';
 import { HiPencilAlt } from 'react-icons/hi';
+import ChildrenComments from '@/app/components/ChildrenComments.jsx';
+import ChildrenOfChildrenComments from '@/app/components/ChildrenOfChildrenComments.jsx';
 
 export default async function postIdPage({ params }) {
   const { postId } = params;
@@ -12,7 +14,7 @@ export default async function postIdPage({ params }) {
 
   return (
     <div className={styles.mainContainer}>
-      <p className={styles.mainRedditTitle}>{post.title}</p>
+      <p className={styles.mainPostTitle}>{post.title}</p>
 
       {post && (
         <div className={styles.postIdContainer} key={post.id}>
@@ -56,6 +58,19 @@ export default async function postIdPage({ params }) {
           </div>
         </div>
       )}
+
+      {post && post.children && post.children.length > 0 && (
+        <ChildrenComments postId={post.id} />
+      )}
+
+      {post &&
+        post.children &&
+        post.children.map((childPost) => (
+          <ChildrenOfChildrenComments
+            key={childPost.id}
+            postId={childPost.id}
+          />
+        ))}
     </div>
   );
 }
