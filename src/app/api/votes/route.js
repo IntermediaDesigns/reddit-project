@@ -1,17 +1,19 @@
 import { prisma } from '@/app/lib/prisma.js';
 
-
 export default async function handleVote(postId, voteType) {
   try {
-    const vote = await prisma.vote.create({
-      data: {
-        postId,
-        voteType,
+    const votes = await prisma.post.findMany({
+      where: {
+        postId: postId,
+      },
+      include: {
+        post: true,
+        user: true,
       },
     });
 
-    if (vote) {
-      return { success: true, message: 'Vote successful' };
+    if (votes) {
+      return { success: true, message: 'Vote successful', votes: votes };
     } else {
       return { success: false, error: 'Failed to create vote' };
     }
@@ -19,4 +21,3 @@ export default async function handleVote(postId, voteType) {
     return { success: false, error: error.message };
   }
 }
-

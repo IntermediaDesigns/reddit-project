@@ -3,13 +3,17 @@ import { prisma } from '@/app/lib/prisma.js';
 import { HiXCircle } from 'react-icons/hi';
 import { HiPencilAlt } from 'react-icons/hi';
 import ChildrenComments from '@/app/components/ChildrenComments.jsx';
-import ChildrenOfChildrenComments from '@/app/components/ChildrenOfChildrenComments.jsx';
+
 
 export default async function postIdPage({ params }) {
   const { postId } = params;
   const post = await prisma.post.findFirst({
     where: { parentId: null, id: postId },
-    include: { user: true, subreddit: true, children: { include: { user: true } } },
+    include: {
+      user: true,
+      subreddit: true,
+      children: { include: { user: true } },
+    },
   });
 
   return (
@@ -59,17 +63,14 @@ export default async function postIdPage({ params }) {
         </div>
       )}
 
-      {post && post.children && post.children.map((childPost) => (
-        <div key={childPost.id}>
-          <ChildrenComments postId={childPost.id} />
-        </div>
-      ))}
-
-      {post && post.children && post.children.map((childPost) => (
-        <div key={childPost.id}>
-          <ChildrenOfChildrenComments parentId={childPost.id} />
-        </div>
-      ))}
+      
+      {post &&
+        post.children &&
+        post.children.map((childPost) => (
+          <div key={childPost.id}>
+            <ChildrenComments postId={childPost.id} />
+          </div>
+        ))}
     </div>
   );
 }
