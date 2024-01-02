@@ -9,7 +9,7 @@ export default async function postIdPage({ params }) {
   const { postId } = params;
   const post = await prisma.post.findFirst({
     where: { parentId: null, id: postId },
-    include: { user: true, subreddit: true, children: true },
+    include: { user: true, subreddit: true, children: { include: { user: true } } },
   });
 
   return (
@@ -42,11 +42,11 @@ export default async function postIdPage({ params }) {
               </div>
             </div>
 
-            <div className={styles.post}>{post.message}</div>
+            <div className={styles.postId}>{post.message}</div>
 
             <div className={styles.statPostIdContainer}>
               <button className={styles.commentBtn}>
-                <span className={styles.spanComment}>Comment</span>
+                <span className={styles.spanComment}>💬 Comment</span>
               </button>
 
               <div className={styles.postIdDateContainer}>
@@ -59,18 +59,17 @@ export default async function postIdPage({ params }) {
         </div>
       )}
 
-      {post && post.children && post.children.length > 0 && (
-        <ChildrenComments postId={post.id} />
-      )}
+      {post && post.children && post.children.map((childPost) => (
+        <div key={childPost.id}>
+          <ChildrenComments postId={childPost.id} />
+        </div>
+      ))}
 
-      {post &&
-        post.children &&
-        post.children.map((childPost) => (
-          <ChildrenOfChildrenComments
-            key={childPost.id}
-            postId={childPost.id}
-          />
-        ))}
+      {post && post.children && post.children.map((childPost) => (
+        <div key={childPost.id}>
+          <ChildrenOfChildrenComments parentId={childPost.id} />
+        </div>
+      ))}
     </div>
   );
 }

@@ -2,10 +2,10 @@ import styles from '@/app/page.module.css';
 import React from 'react';
 import { prisma } from '../lib/prisma.js';
 
-export default async function ChildrenOfChildrenComments({ postId }) {
+export default async function ChildrenOfChildrenComments({ parentId }) {
   const posts = await prisma.post.findMany({
-    where: { parentId: postId },
-    include: { user: true },
+    where: { parentId: parentId},
+    include: { user: true, children: true },
   });
   
   if (posts.length === 0) {

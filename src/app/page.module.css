@@ -209,6 +209,8 @@ form.form1 {
   align-items: flex-start;
   flex-direction: column;
   font-family: 'Mina', sans-serif;
+  width: 100%;
+  padding-right: 20px;
 }
 
 .titlePostContainer {
@@ -238,7 +240,6 @@ form.form1 {
   font-size: 18px;
   color: tomato;
   text-align: right;
-  margin-right: 15px;
 }
 
 .postUsername {
@@ -269,6 +270,7 @@ form.form1 {
   height: auto;
   padding: 5px 10px;
   font-family: 'Mina', sans-serif;
+  width: 100%;
 }
 .statContainer {
   display: flex;
@@ -298,7 +300,6 @@ form.form1 {
   word-spacing: 5px;
   height: 30px;
   margin-bottom: 2px;
-  margin-right: 15px;
   font-family: 'Mina', sans-serif;
 }
 
@@ -641,6 +642,7 @@ form.form1 {
   border: 1px solid gray;
   height: auto;
   box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.323);
+  width: auto;
 }
 
 .postIdVoteContainer {
@@ -673,6 +675,8 @@ form.form1 {
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  width: 100%;
+  padding-right: 20px;
 }
 
 .postIdUserContainer {
@@ -693,6 +697,18 @@ form.form1 {
   font-style: italic;
 }
 
+.postId {
+  display: flex;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  height: auto;
+  padding: 5px 10px;
+  font-family: 'Mina', sans-serif;
+  width: 100%;
+}
 .postPostedBy {
   display: flex;
   font-family: 'Mina', sans-serif;
@@ -723,7 +739,7 @@ form.form1 {
 .deleteBtn {
   display: flex;
   font-size: 24px;
-  margin-right: 20px;
+  margin-right: 5px;
   border-radius: 50%;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); /* shadow-md */
   background: linear-gradient(

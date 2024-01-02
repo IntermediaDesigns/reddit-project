@@ -4,9 +4,11 @@ import { prisma } from '../lib/prisma.js';
 
 export default async function ChildrenComments({ postId }) {
   const posts = await prisma.post.findMany({
-    where: { parentId: postId },
-    include: { user: true },
+    where: { id: postId },
+    include: { user: true, children: true},
   });
+
+  
 
   return (
     <div className={styles.mainCommentsContainer}>
@@ -15,7 +17,7 @@ export default async function ChildrenComments({ postId }) {
           <div className={styles.innerCommentContainer} key={post.id}>
             <div className={styles.commentUserContainer}>
               <div className={styles.postIdUsername}>
-                <span className={styles.postPostedBy}>Commented By:</span>{' '}
+                <span className={styles.postPostedBy}>Commented By:</span>
                 {post.user.username}
               </div>
 
