@@ -20,16 +20,28 @@ export default async function Home() {
     })
   );
 
+  const subreddits = await prisma.subreddit.findMany({
+    include: {
+      posts: {
+        where: {
+          parentId: null
+        }
+      },
+    },
+  });
+ 
+  subreddits.sort((a, b) => a.name.localeCompare(b.name));
+
   return (
     <div className={styles.mainContainer}>
       <p className={styles.mainRedditTitle}>Reddit</p> 
         
-        <CreatePost /> 
+        <CreatePost subreddits={subreddits} /> 
 
       {postsWithTotalComments.map((post) => {
         return (
           <div className={styles.postsContainer} key={post.id}>
-            <Votes postId={post.id}/>
+            {/* <Votes /> */}
 
             <div className={styles.innerPostContainer}>
               <div className={styles.titlePostContainer}>

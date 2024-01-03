@@ -1,20 +1,22 @@
-import { prisma } from "@/app/lib/prisma.js";
+import { fetchUser } from '@/app/lib/fetchUser.js';
+import { prisma } from '@/app/lib/prisma.js';
+import { NextResponse } from 'next/server.js';
 
-export default async function subredditHandler(req, res) {
+export default async function POST(req, res) {
   try {
-    if (req.method === 'POST') {
-      const { name } = req.body;
+    
+      const { name } = await req.json();
+
+      const user = await fetchUser();
 
       const subreddit = await prisma.subreddit.create({
         data: {
-          name: subreddit.name,
+           name,
+          userId: user.id,
         },
       });
-
-      return NextResponse.json({ success: true, message: "Subreddit created successfully" });
-    } else {
-      
-    }
+    
+    return NextResponse.json({ success: true, subreddit});
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }

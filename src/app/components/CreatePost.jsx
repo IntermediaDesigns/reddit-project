@@ -1,29 +1,17 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
 import { HiXCircle } from 'react-icons/hi';
+import { GiConfirmed } from 'react-icons/gi';
+import Dropdown from './Dropdown.jsx';
+import CreateSubreddit from './CreateSubreddit.jsx';
 
-export default function CreatePost() {
+export default function CreatePost({subreddits}) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
-  const [subreddit, setSubreddit] = useState('');
+  
   const [message, setMessage] = useState('');
-  const [subreddits, setSubreddits] = useState([]);
-
-  useEffect(() => {
-    async function fetchSubreddits() {
-      const response = await fetch('/api/subreddits');
-      const data = await response.json();
-      setSubreddits(data);
-    }
-
-    fetchSubreddits();
-  }, []);
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Handle form submission here
-  };
+  
 
   return (
     <div
@@ -43,55 +31,48 @@ export default function CreatePost() {
       )}
 
       {showForm && (
-        <form className={styles.createFormContainer} onSubmit={handleSubmit}>
+        <form className={styles.createFormContainer}>
           <div className={styles.topFormContainer}>
             <div className={styles.closeBtn} onClick={() => setShowForm(false)}>
               <HiXCircle />
             </div>
+
+            <p className={styles.createPostTitle}>Create Post</p>
+
             <div className={styles.formContainer}>
-              <div className={styles.subNameLabel}>
-                <label>Create Subreddit Name: </label>
-                <input
-                  className={styles.subCreateInput}
-                  type='text'
-                  placeholder='Enter Subreddit Name'
-                />
-              </div>
-              <div className={styles.dropdownSub}>
+
+              <CreateSubreddit />
+
+              
+
+              <Dropdown subreddits={subreddits} />
+
+            </div>
+
+            <div className={styles.formMessageContainer}>
+              <div className={styles.titleMessage}>
                 <label>
-                  or Select Subreddit:
-                  <select
-                  className={styles.subSelect}
-                    value={subreddit}
-                    onChange={(e) => setSubreddit(e.target.value)}
-                  >
-                    {subreddits.map((subreddit) => (
-                      <option key={subreddit.id} value={subreddit.name}>
-                        {subreddit.name}
-                      </option>
-                    ))}
-                  </select>
+                  Title:
+                  <input
+                    className={styles.titleInput}
+                    type='text'
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                  />
+                </label>
+              </div>
+
+              <div className={styles.createMessageContainer}>
+                <label>
+                  Message:
+                  <textarea
+                    className={styles.messageTextArea}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                  />
                 </label>
               </div>
             </div>
-
-            <label>
-              Title:
-              <input
-                type='text'
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-              />
-            </label>
-
-            <label>
-              Message:
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-            </label>
-
             <button className={styles.createBtn} type='submit'>
               <span className={styles.spanCreateBtn}>Submit</span>
             </button>

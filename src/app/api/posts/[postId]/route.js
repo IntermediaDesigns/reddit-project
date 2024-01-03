@@ -1,33 +1,19 @@
 import { prisma } from '@/app/lib/prisma.js';
 import { NextResponse } from 'next/server.js';
+import { fetchUser } from '@/app/lib/fetchUser.js';
 
-export async function GET(request, response) {
-  try {
-    const { postId } = response.params;
-
-    const post = await prisma.post.findMany({
-      where: { id: postId },
-    });
-
-    if (!post) {
-      return NextResponse.json({
-        success: false,
-        error: 'No post with that ID found.',
-      });
-    }
-    return NextResponse.json({ success: true, post });
-  } catch (error) {
-    return NextResponse.json({ success: false, error: error.message });
-  }
-}
 
 export async function PUT(request, response) {
   try {
     const { postId } = response.params;
-    const { text } = await request.json();
+    const { title, message } = await request.json();
 
-    const post = await prisma.post.findFirst({
+    const post = await prisma.post.update({
       where: { id: postId },
+      data: { 
+        title,
+        message,
+      },
     });
 
     if (!post) {
@@ -36,15 +22,8 @@ export async function PUT(request, response) {
         error: "No post with that ID found.",
       });
     }
-
     
-    const updatedPost = await prisma.post.update({
-      where: {
-        id: postId,
-      },
-      data: { text },
-    });
-    return NextResponse.json({ success: true, post: updatedPost });
+    return NextResponse.json({ success: true, post });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }
@@ -54,7 +33,7 @@ export async function DELETE(request, response) {
   try {
     const { postId } = response.params;
 
-    const post = await prisma.post.findFirst({
+    const post = await prisma.post.delete({
       where: { id: postId },
     });
 
@@ -65,13 +44,8 @@ export async function DELETE(request, response) {
       });
     }
 
-    await prisma.post.delete({
-      where: {
-        id: postId,
-      },
-    });
 
-    return NextResponse.json({ success: true, message: "Post deleted successfully." });
+    return NextResponse.json({ success: true, post });
   } catch (error) {
     return NextResponse.json({ success: false, error: error.message });
   }

@@ -151,7 +151,7 @@ export default function Navbar() {
               {isLoggedIn ? (
                 <>
                   <Link href='/logout'>
-                    <button className='menuBtns'>
+                    <button className='menuBtns' onClick={handleNav}>
                       <span className='span'>
                         Logout
                       </span>
@@ -161,7 +161,7 @@ export default function Navbar() {
               ) : (
                 <>
                   <Link href='/login'>
-                    <button className='menuBtns'>
+                    <button className='menuBtns' onClick={handleNav}>
                       <span className='span'>
                         Login
                       </span>
@@ -169,7 +169,7 @@ export default function Navbar() {
                   </Link>
 
                   <Link href='/register'>
-                    <button className='menuBtns'>
+                    <button className='menuBtns' onClick={handleNav}>
                       <span className='span'>
                         Register
                       </span>

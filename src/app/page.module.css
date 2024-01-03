@@ -917,6 +917,13 @@ form.form1 {
   justify-content: center;
   width: 100%;
 }
+
+.createPostTitle {
+  font-family: 'Bungee Spice', sans-serif;
+  font-size: 24px;
+  margin-bottom: 10px;
+  text-shadow: 1px 2px 1px #47474788;
+}
 .formContainer {
   display: flex;
   flex-direction: row;
@@ -927,6 +934,22 @@ form.form1 {
   padding-left: 20px;
   padding-right: 25px;
   padding-bottom: 30px;
+}
+
+.subConfirmBtn {
+  display: flex;
+  font-size: 24px;
+  margin-right: 10px;
+  border-radius: 50%;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497);
+  background: linear-gradient(
+    to right,
+    #25a8ea,
+    lightblue
+  );
+  cursor: pointer;
+  font-family: 'Mina', sans-serif;
+  margin-top: 25px;
 }
 .createBtn {
   display: flex;
@@ -991,27 +1014,73 @@ form.form1 {
   padding-top: 10px;
   padding-bottom: 10px;
   font-size: 36px;
+  
 }
 
 .subCreateInput {
+  display: flex;
+  flex-direction: row;
   border-radius: 5px;
   border: 1px solid lightgray;
   padding: 5px;
   width: 250px;
+  font-family: 'Mina', sans-serif;
 }
 
 .subNameLabel {
   display: flex;
   flex-direction: column;
-
+  font-family: 'Mina', sans-serif;
 }
 
 .dropdownSub {
   display: flex;
   flex-direction: column;
+  font-family: 'Mina', sans-serif;
+  padding: 5px;
+  
 }
 
 .subSelect {
   display: flex;
   width: 250px;
+  font-family: 'Mina', sans-serif;
+  padding: 5px;
+  margin-top: 21px;
+  border-radius: 5px;
+}
+
+.formMessageContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Mina', sans-serif;
+}
+
+.titleInput {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 10px;
+  font-family: 'Mina', sans-serif;
+}
+
+.titleMessage, .createMessageContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: 15px;
+  font-family: 'Mina', sans-serif;
+}
+
+.messageTextArea {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  padding: 5px;
+  margin-bottom: 20px;
+  font-family: 'Mina', sans-serif;
 }
