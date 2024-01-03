@@ -7,6 +7,23 @@ export default function SubredditForm() {
   const [showForm, setShowForm] = useState(false);
   const [subredditName, setSubredditName] = useState('');
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const response = await fetch('/api/subreddits', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name: subredditName }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div
       className={styles.createPostContainer}
@@ -25,7 +42,7 @@ export default function SubredditForm() {
       )}
 
       {showForm && (
-        <form className={styles.createFormContainer}>
+        <form className={styles.createFormContainer} onSubmit={handleSubmit}>
           <div className={styles.topFormContainer}>
             <div className={styles.closeBtn} onClick={() => setShowForm(false)}>
               <HiXCircle />
@@ -35,15 +52,13 @@ export default function SubredditForm() {
 
             <div className={styles.formMessageContainer}>
               <div className={styles.titleMessage}>
-                <label>
-                  Enter Subreddit Name:
-                  <input
-                    className={styles.titleInput}
-                    type='text'
-                    value={subredditName}
-                    onChange={(e) => setSubredditName(e.target.value)}
-                  />
-                </label>
+                <input
+                  className={styles.titleInput}
+                  type='text'
+                  value={subredditName}
+                  placeholder='Enter Subreddit Name'
+                  onChange={(e) => setSubredditName(e.target.value)}
+                />
               </div>
             </div>
             <button className={styles.createBtn} type='submit'>

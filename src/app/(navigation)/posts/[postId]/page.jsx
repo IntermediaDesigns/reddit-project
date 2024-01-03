@@ -1,8 +1,9 @@
 import styles from '@/app/page.module.css';
 import { prisma } from '@/app/lib/prisma.js';
-import { HiXCircle } from 'react-icons/hi';
-import { HiPencilAlt } from 'react-icons/hi';
 import ChildrenComments from '@/app/components/ChildrenComments.jsx';
+import MakeComment from '@/app/components/MakeComment.jsx';
+import DeletePost from '@/app/components/DeletePost.jsx';
+import EditPost from '@/app/components/EditPost.jsx';
 
 
 export default async function postIdPage({ params }) {
@@ -37,21 +38,17 @@ export default async function postIdPage({ params }) {
                 </div>
               )}
               <div className={styles.iconContainer}>
-                <div className={styles.editBtn}>
-                  <HiPencilAlt />
-                </div>
-                <div className={styles.deleteBtn}>
-                  <HiXCircle />
-                </div>
+                <EditPost />
+                
+                <DeletePost />
               </div>
             </div>
 
             <div className={styles.postId}>{post.message}</div>
 
             <div className={styles.statPostIdContainer}>
-              <button className={styles.commentBtn}>
-                <span className={styles.spanComment}>💬 Comment</span>
-              </button>
+              
+              <MakeComment />
 
               <div className={styles.postIdDateContainer}>
                 <p className={styles.datePostIdStat}>
