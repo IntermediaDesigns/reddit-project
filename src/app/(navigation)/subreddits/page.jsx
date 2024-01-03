@@ -1,6 +1,7 @@
 import styles from '@/app/page.module.css';
 import { prisma } from '@/app/lib/prisma.js';
 import Link from 'next/link.js';
+import SubredditForm from '@/app/components/SubredditForm.jsx';
 
 export default async function Subreddits() {
   
@@ -19,6 +20,8 @@ export default async function Subreddits() {
   return (
     <div className={styles.mainSubContainer}>
       <p className={styles.subredditTitle}>Subreddits</p>
+
+      <SubredditForm />
 
       {subreddits.map((subreddit) => (
         <div className={styles.subredditContainer} key={subreddit.id}>

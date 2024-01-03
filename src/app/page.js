@@ -24,19 +24,19 @@ export default async function Home() {
     include: {
       posts: {
         where: {
-          parentId: null
-        }
+          parentId: null,
+        },
       },
     },
   });
- 
+
   subreddits.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className={styles.mainContainer}>
-      <p className={styles.mainRedditTitle}>Reddit</p> 
-        
-        <CreatePost subreddits={subreddits} /> 
+      <p className={styles.mainRedditTitle}>Reddit</p>
+
+      <CreatePost subreddits={subreddits} />
 
       {postsWithTotalComments.map((post) => {
         return (
@@ -75,7 +75,6 @@ export default async function Home() {
                     Created: {post.createdAt.toLocaleDateString()}
                   </p>
                 </div>
-                
               </div>
             </div>
           </div>
