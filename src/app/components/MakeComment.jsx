@@ -52,7 +52,7 @@ export default function MakeComment({ parentId, subredditId }) {
               value={message}
               placeholder='Add a comment'
               onChange={(e) => setMessage(e.target.value)}
-              className={styles.commentTextInput}
+              className={styles.postCommentTextInput}
             ></input>
 
             <button className={styles.commentBtn} type='submit'>

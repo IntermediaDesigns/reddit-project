@@ -1,14 +1,13 @@
 'use client';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import Cookies from 'js-cookie';
-import ResponsiveNavbar from '../ResponsiveNavbar.jsx';
+import styles from '@/app/page.module.css';
 
-export default function Navbar() {
+export default function ResponsiveNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const router = useRouter();
 
   const handleNav = () => {
@@ -16,49 +15,16 @@ export default function Navbar() {
   };
 
   const searchParams = useSearchParams();
-  const isLoggedIn = searchParams.get('isLoggedIn')
-  console.log(isLoggedIn)
-
-  // const handleLinkClick = () => {
-  //   const token = Cookies.get('token');
-  //   if (!token) {
-
-  //     // setIsLoggedIn(false);
-  //     router.push('/');
-  //   } else if (!token) {
-  //     // setIsLoggedIn(true); 
-  //     router.push('/');   
-  //   }
-    
-
-  //   setMenuOpen(false);
-  // };
-
-  useEffect(() => {
-    const token = Cookies.get('token');
-    // setIsLoggedIn(!!token);
-    console.log(token)
-    const handleResize = () => {
-      if (window.innerWidth > 768 && menuOpen) {
-        setMenuOpen(false);
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [menuOpen]);
+  const isLoggedIn = searchParams.get('isLoggedIn');
+  console.log(isLoggedIn);
 
   return (
     <>
-      <nav className='navBarContainer'>
-        <ResponsiveNavbar />
-        {/* <div>
+      <nav className={styles.navBarContainer}>
+        <div>
           <Link href={'/'}>
             <img
-              className='logo'
+              className={styles.logo}
               src='/Logo.png'
               alt='Logo'
               width='60'
@@ -68,15 +34,13 @@ export default function Navbar() {
         </div>
 
         <div className='homeLogoContainer md:flex sm:hidden'>
-          <Link className='logo' href={'/'}>
+          <Link className={styles.logo} href={'/'}>
             <img src='/Home2.png' alt='Home' width='50' />
           </Link>
 
           <Link href='/subreddits'>
-            <button className='menuBtns'>
-              <span className='span'>
-                Subreddits
-              </span>
+            <button className={styles.menuBtns}>
+              <span className={styles.span}>Subreddits</span>
             </button>
           </Link>
         </div>
@@ -84,10 +48,8 @@ export default function Navbar() {
         {isLoggedIn ? (
           <div className={`flex md:flex sm:hidden `}>
             <Link href='/logout'>
-              <button className='menuBtns'>
-                <span className='span'>
-                  Logout
-                </span>
+              <button className={styles.menuBtns}>
+                <span className={styles.span}>Logout</span>
               </button>
             </Link>
           </div>
@@ -95,18 +57,14 @@ export default function Navbar() {
           <>
             <div className={`flex md:flex sm:hidden `}>
               <Link href='/login'>
-                <button className='menuBtns'>
-                  <span className='span'>
-                    Login
-                  </span>
+                <button className={styles.menuBtns}>
+                  <span className={styles.span}>Login</span>
                 </button>
               </Link>
 
               <Link href='/register'>
-                <button className='menuBtns'>
-                  <span className='span'>
-                    Register
-                  </span>
+                <button className={styles.menuBtns}>
+                  <span className={styles.span}>Register</span>
                 </button>
               </Link>
             </div>
@@ -132,10 +90,10 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className='menuContainer'>
-            <div className='menuItems'>
-              <Link onClick={handleNav}
-                
+          <div className={styles.menuContainer}>
+            <div className={styles.menuItems}>
+              <Link
+                onClick={handleNav}
                 // onClick={() => handleLinkClick('/')}
                 href={'/'}
               >
@@ -143,50 +101,42 @@ export default function Navbar() {
               </Link>
 
               <Link href='/subreddits'>
-                <button className='menuBtns'>
-                  <span className='span'>
-                    Subreddits
-                  </span>
+                <button className={styles.menuBtns}>
+                  <span className={styles.span}>Subreddits</span>
                 </button>
               </Link>
 
               {isLoggedIn ? (
                 <>
                   <Link href='/logout'>
-                    <button className='menuBtns' onClick={handleNav}>
-                      <span className='span'>
-                        Logout
-                      </span>
+                    <button className={styles.menuBtns} onClick={handleNav}>
+                      <span className={styles.span}>Logout</span>
                     </button>
                   </Link>
                 </>
               ) : (
                 <>
                   <Link href='/login'>
-                    <button className='menuBtns' onClick={handleNav}>
-                      <span className='span'>
-                        Login
-                      </span>
+                    <button className={styles.menuBtns} onClick={handleNav}>
+                      <span className={styles.span}>Login</span>
                     </button>
                   </Link>
 
                   <Link href='/register'>
-                    <button className='menuBtns' onClick={handleNav}>
-                      <span className='span'>
-                        Register
-                      </span>
+                    <button className={styles.menuBtns} onClick={handleNav}>
+                      <span className={styles.span}>Register</span>
                     </button>
                   </Link>
                 </>
               )}
             </div>
           </div>
-        </div> */}
+        </div>
       </nav>
 
-      {/* {menuOpen && (
+      {menuOpen && (
         <div className='fixed inset-0 backdrop-blur-sm bg-black/20 z-10'></div>
-      )} */}
+      )}
     </>
   );
 }
