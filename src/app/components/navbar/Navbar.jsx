@@ -18,20 +18,20 @@ export default function Navbar() {
   const isLoggedIn = searchParams.get('isLoggedIn')
   console.log(isLoggedIn)
 
-  const handleLinkClick = () => {
-    const token = Cookies.get('token');
-    if (!token) {
+  // const handleLinkClick = () => {
+  //   const token = Cookies.get('token');
+  //   if (!token) {
 
-      // setIsLoggedIn(false);
-      router.push('/');
-    } else if (!token) {
-      // setIsLoggedIn(true); 
-      router.push('/');   
-    }
+  //     // setIsLoggedIn(false);
+  //     router.push('/');
+  //   } else if (!token) {
+  //     // setIsLoggedIn(true); 
+  //     router.push('/');   
+  //   }
     
 
-    setMenuOpen(false);
-  };
+  //   setMenuOpen(false);
+  // };
 
   useEffect(() => {
     const token = Cookies.get('token');
@@ -132,9 +132,9 @@ export default function Navbar() {
 
           <div className='menuContainer'>
             <div className='menuItems'>
-              <Link
+              <Link onClick={handleNav}
                 
-                onClick={() => handleLinkClick('/')}
+                // onClick={() => handleLinkClick('/')}
                 href={'/'}
               >
                 <img src='/Home2.png' alt='Home' width='50' />

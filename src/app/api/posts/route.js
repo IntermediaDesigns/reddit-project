@@ -2,11 +2,25 @@ import { fetchUser } from '@/app/lib/fetchUser.js';
 import { prisma } from '@/app/lib/prisma.js';
 import { NextResponse } from 'next/server.js';
 
-export default async function POST(req, res) {
+export async function POST(req, res) {
   try {
     const { title, message, subredditId, parentId } = await req.json();
 
     const user = await fetchUser();
+
+    if (!subredditId) {
+      return NextResponse.json({
+        success: false,
+        error: 'Subreddit is required',
+      });
+    }
+
+    if (!message) {
+      return NextResponse.json({
+        success: false,
+        error: 'Message is required',
+      });
+    }
 
     const post = await prisma.post.create({
       data: {

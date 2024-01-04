@@ -2,6 +2,7 @@ import styles from '@/app/page.module.css';
 import React from 'react';
 import { prisma } from '../lib/prisma.js';
 import { BsArrowReturnRight } from 'react-icons/bs';
+import MakeChildComment from './MakeChildComment.jsx';
 
 export default async function ChildrenComments({ postId }) {
   const post = await prisma.post.findUnique({
@@ -33,9 +34,7 @@ export default async function ChildrenComments({ postId }) {
           <div className={styles.commentChildContainer}>{post.message}</div>
 
           <div>
-            <button className={styles.makeChildCommentBtn}>
-              <span className={styles.spanMakeChildCommentBtn}>💬 Reply</span>
-            </button>
+            <MakeChildComment parentId={post.id} subredditId={post.subredditId} />
           </div>
           
         </div>

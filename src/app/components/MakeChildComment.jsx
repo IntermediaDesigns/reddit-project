@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
 import { useRouter } from 'next/navigation.js';
 
-export default function MakeComment({ parentId, subredditId }) {
+export default function MakeChildComment({ parentId, subredditId }) {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);
@@ -37,8 +37,8 @@ export default function MakeComment({ parentId, subredditId }) {
   return (
     <>
       {!showForm && (
-        <button className={styles.commentBtn} onClick={() => setShowForm(true)}>
-          <span className={styles.spanComment}>💬 Comment</span>
+        <button className={styles.makeChildCommentBtn} onClick={() => setShowForm(true)}>
+          <span className={styles.spanMakeChildCommentBtn}>💬 Reply</span>
         </button>
       )}
       <div>

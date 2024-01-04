@@ -3,8 +3,7 @@ import { prisma } from '@/app/lib/prisma.js';
 import ChildrenComments from '@/app/components/ChildrenComments.jsx';
 import MakeComment from '@/app/components/MakeComment.jsx';
 import DeletePost from '@/app/components/DeletePost.jsx';
-import EditPost from '@/app/components/EditPost.jsx';
-
+import Post from '@/app/components/Post.jsx';
 
 export default async function postIdPage({ params }) {
   const { postId } = params;
@@ -38,17 +37,15 @@ export default async function postIdPage({ params }) {
                 </div>
               )}
               <div className={styles.iconContainer}>
-                <EditPost />
-                
-                <DeletePost />
+                <DeletePost post={post} />
               </div>
             </div>
-
-            <div className={styles.postId}>{post.message}</div>
+            
+                <Post post={post} />
+             
 
             <div className={styles.statPostIdContainer}>
-              
-              <MakeComment />
+              <MakeComment parentId={post.id} subredditId={post.subredditId} />
 
               <div className={styles.postIdDateContainer}>
                 <p className={styles.datePostIdStat}>
@@ -60,7 +57,6 @@ export default async function postIdPage({ params }) {
         </div>
       )}
 
-      
       {post &&
         post.children &&
         post.children.map((childPost) => (

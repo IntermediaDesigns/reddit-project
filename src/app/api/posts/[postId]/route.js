@@ -6,15 +6,22 @@ import { fetchUser } from '@/app/lib/fetchUser.js';
 export async function PUT(request, response) {
   try {
     const { postId } = response.params;
-    const { title, message } = await request.json();
+    const { message } = await request.json();
+    const user = await fetchUser();
 
     const post = await prisma.post.update({
       where: { id: postId },
       data: { 
-        title,
         message,
       },
     });
+
+    if (!user) {
+      return NextResponse.json({
+        success: false,
+        error: "Authentication required. Please log in to edit post.",
+      });
+    }
 
     if (!post) {
       return NextResponse.json({
@@ -32,10 +39,18 @@ export async function PUT(request, response) {
 export async function DELETE(request, response) {
   try {
     const { postId } = response.params;
+    const user = await fetchUser();
 
     const post = await prisma.post.delete({
       where: { id: postId },
     });
+
+    if (!user) {
+      return NextResponse.json({
+        success: false,
+        error: "Authentication required. Please log in to delete post.",
+      });
+    }
 
     if (!post) {
       return NextResponse.json({

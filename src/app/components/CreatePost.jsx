@@ -2,15 +2,49 @@
 import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
 import { HiXCircle } from 'react-icons/hi';
-import Dropdown from './Dropdown.jsx';
 import CreateSubreddit from './CreateSubreddit.jsx';
+import { useRouter } from 'next/navigation.js';
 
-export default function CreatePost({subreddits}) {
+export default function CreatePost({ subreddits }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
-  
+  const [error, setError] = useState('');
+
   const [message, setMessage] = useState('');
-  
+
+  const [subreddit, setSubreddit] = useState('');
+
+  const router = useRouter()
+
+  const handleSubredditChange = (event) => {
+    setSubreddit(event.target.value);
+  };
+
+  async function handlePostSubmit(event) {
+    event.preventDefault();
+    const response = await fetch('/api/posts', {
+      method: 'POST',
+      body: JSON.stringify({
+        message: message,
+        title: title,
+        subredditId: subreddit,
+      }),
+    });
+
+      const data = await response.json();
+
+        if (data.error) {
+          setError(data.error);
+
+          console.log(error)
+        } else {
+          setMessage('');
+          setTitle('');
+          setError('');
+          setShowForm(false);
+        }
+      router.refresh();
+  }
 
   return (
     <div
@@ -30,7 +64,7 @@ export default function CreatePost({subreddits}) {
       )}
 
       {showForm && (
-        <form className={styles.createFormContainer}>
+        <form className={styles.createFormContainer} onSubmit={handlePostSubmit}>
           <div className={styles.topFormContainer}>
             <div className={styles.closeBtn} onClick={() => setShowForm(false)}>
               <HiXCircle />
@@ -39,13 +73,22 @@ export default function CreatePost({subreddits}) {
             <p className={styles.createPostTitle}>Create Post</p>
 
             <div className={styles.formContainer}>
-
               <CreateSubreddit />
 
-              
-
-              <Dropdown subreddits={subreddits} />
-
+              <div className={styles.dropdownSub}>
+                <select
+                  className={styles.subSelect}
+                  value={subreddit}
+                  onChange={handleSubredditChange}
+                >
+                  <option value=''>or Select Subreddit</option>
+                  {subreddits.map((subreddit) => (
+                    <option key={subreddit.id} value={subreddit.id}>
+                      {subreddit.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
             </div>
 
             <div className={styles.formMessageContainer}>
@@ -72,7 +115,11 @@ export default function CreatePost({subreddits}) {
                 </label>
               </div>
             </div>
-            <button className={styles.createBtn} type='submit'>
+            <button
+              className={styles.createBtn}
+              type='submit'
+              
+            >
               <span className={styles.spanCreateBtn}>Submit</span>
             </button>
           </div>

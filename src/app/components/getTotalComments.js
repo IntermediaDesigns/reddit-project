@@ -3,7 +3,7 @@ import { prisma } from '@/app/lib/prisma.js';
 export default async function getTotalComments(postId) {
        const children = await prisma.post.findMany({
          where: { parentId: postId },
-         include: { children: true },
+         include: { children: true, votes: true },
        });
      
        let totalComments = children.length;

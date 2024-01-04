@@ -6,6 +6,7 @@ export async function fetchUser() {
   try {
     const cookieStore = cookies();
     const userCookie = cookieStore.get('token');
+
     if (!userCookie) {
       return { user: {}, token: null };
     }
@@ -17,7 +18,7 @@ export async function fetchUser() {
 
     delete user.password;
 
-    return { user, token: userCookie.value };
+    return user;
   } catch (error) {
     console.log(error);
     return { user: {}, token: null };

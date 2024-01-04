@@ -2,23 +2,29 @@
 import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
 import { HiXCircle } from 'react-icons/hi';
+import { useRouter } from 'next/navigation.js';
 
 export default function SubredditForm() {
   const [showForm, setShowForm] = useState(false);
   const [subredditName, setSubredditName] = useState('');
+  const [error, setError] = useState('');
+  const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const response = await fetch('/api/subreddits', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ name: subredditName }),
       });
       const data = await response.json();
-      console.log(data);
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setSubredditName('');
+        router.refresh();
+        
+      }
     } catch (error) {
       console.error(error);
     }

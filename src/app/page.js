@@ -9,7 +9,7 @@ import CreatePost from './components/CreatePost.jsx';
 export default async function Home() {
   const posts = await prisma.post.findMany({
     where: { parentId: null },
-    include: { user: true, subreddit: true, children: true },
+    include: { user: true, votes: true, subreddit: true, children: true },
     orderBy: { createdAt: 'desc' },
   });
 
@@ -41,7 +41,7 @@ export default async function Home() {
       {postsWithTotalComments.map((post) => {
         return (
           <div className={styles.postsContainer} key={post.id}>
-            {/* <Votes /> */}
+            {/* <Votes votes={post.votes} /> */}
 
             <div className={styles.innerPostContainer}>
               <div className={styles.titlePostContainer}>

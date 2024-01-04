@@ -2,7 +2,7 @@ import { fetchUser } from '@/app/lib/fetchUser.js';
 import { prisma } from '@/app/lib/prisma.js';
 import { NextResponse } from 'next/server.js';
 
-export default async function POST(req, res) {
+export async function POST(req, res) {
   try {
     
       const { name } = await req.json();
