@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
-import { GiConfirmed } from 'react-icons/gi';
+import { MdPostAdd } from "react-icons/md";
 
 export default function CreateSubreddit() {
   const [subredditName, setSubredditName] = useState('');
@@ -38,7 +38,7 @@ const response = await fetch(`/api/subreddits`, {
           onChange={handleInputChange}
         />
       </div>
-      <GiConfirmed
+      <MdPostAdd
         className={styles.subConfirmBtn}
         onClick={handleConfirmClick}
       />

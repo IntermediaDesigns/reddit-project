@@ -352,6 +352,23 @@ form.form1 {
   text-align: center;
   text-shadow: 3px 5px 2px #474747;
 }
+
+.subNoPosts {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  background-color: #ffffff;
+  width: 500px;
+  height: 100px;
+  margin-top: 1em;
+  margin-bottom: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 1.5em;
+  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.559);
+  font-family: 'Mina', sans-serif;
+}
 .subFormContainer {
   display: flex;
   flex-direction: row;
@@ -651,7 +668,8 @@ form.form1 {
   justify-content: space-between;
   margin-top: 10px;
   margin-left: 10px;
-  margin-bottom: 10px;
+  padding-right: 5px;
+  margin-bottom: 15px;
   width: 100%;
 }
 .postIdUsername {
@@ -694,12 +712,12 @@ form.form1 {
   font-size: 24px;
   margin-right: 20px;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); /* shadow-md */
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); 
   background: linear-gradient(
     to right,
     #25a8ea,
     lightblue
-  ); /* from-red-500 via-orange-400 to-yellow-400 bg-gradient-to-r */
+  ); 
   cursor: pointer;
   font-family: 'Mina', sans-serif;
 }
@@ -747,10 +765,10 @@ form.form1 {
   justify-content: center;
   align-items: center;
   height: 44px;
-  margin: 4px; /* m-1 */
-  padding: 4px; /* p-1 */
-  border-radius: 20px; /* rounded-full */
-  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); /* shadow-md */
+  margin: 4px 4px 10px 4px;
+  padding: 4px; 
+  border-radius: 20px; 
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); 
   background: linear-gradient(
     to right,
     #e14327,
@@ -833,6 +851,7 @@ form.form1 {
   font-family: 'Mina', sans-serif;
   padding: 5px;
   width: 100%;
+  margin-bottom: 5px;
 }
 
 .commentChildDateContainer {
@@ -940,7 +959,7 @@ form.form1 {
   display: flex;
   font-size: 24px;
   margin-right: 10px;
-  border-radius: 50%;
+  border-radius: 5px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497);
   background: linear-gradient(
     to right,
@@ -996,7 +1015,7 @@ form.form1 {
   justify-content: flex-end;
   font-size: 24px;
   margin-right: 10px;
-  border-radius: 50%;
+  border-radius: 5px;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); 
   background: linear-gradient(
     to right,
@@ -1033,11 +1052,14 @@ form.form1 {
   font-family: 'Mina', sans-serif;
 }
 
+.selectSubtitle {
+  font-family: 'Mina', sans-serif;
+}
 .dropdownSub {
   display: flex;
   flex-direction: column;
   font-family: 'Mina', sans-serif;
-  padding: 5px;
+  
   
 }
 
@@ -1046,7 +1068,7 @@ form.form1 {
   width: 250px;
   font-family: 'Mina', sans-serif;
   padding: 5px;
-  margin-top: 21px;
+  
   border-radius: 5px;
 }
 
@@ -1083,4 +1105,109 @@ form.form1 {
   padding: 5px;
   margin-bottom: 20px;
   font-family: 'Mina', sans-serif;
+}
+
+/* Post edit */
+.editIconContainer {
+  display: flex;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.editPostBtn {
+  display: flex;
+  font-size: 24px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); 
+  background: linear-gradient(
+    to right,
+    #25a8ea,
+    lightblue
+  ); 
+  cursor: pointer;
+  font-family: 'Mina', sans-serif;
+  
+}
+.commentFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  height: auto;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  margin-top: 10px;
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.308);
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.postFormTextInput {
+  border-radius: 5px;
+  border: 1px solid tomato;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(255, 99, 71, 0.372);
+}
+
+/* Edit Comment */
+.childCommentFormContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  height: auto;
+  width: 100%;
+  margin-bottom: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  box-shadow: 0 2px 1px 1px rgba(0, 0, 0, 0.308);
+  padding-left: 5px;
+  padding-right: 25px;
+}
+
+.childCommentTextInput {
+  border-radius: 5px;
+  border: 1px solid tomato;
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  box-shadow: 0 0 10px rgba(255, 99, 71, 0.372);
+}
+
+.editChildCommentBtn {
+  display: flex;
+  font-size: 24px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.497); 
+  background: linear-gradient(
+    to right,
+    #25a8ea,
+    lightblue
+  ); 
+  cursor: pointer;
+  font-family: 'Mina', sans-serif;
+  margin-left: auto;
+  margin-right: 5px;
+  margin-bottom: 10px;
+}
+
+.iconChildContainer {
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-bottom: 10px;
+}
+
+.statChildIdContainer{
+display: flex;
+align-items: center;
+justify-content: space-between;
+flex-direction: row;
+margin-right: 20px;
 }

@@ -39,11 +39,11 @@ export default async function postIdPage({ params }) {
               <div className={styles.iconContainer}>
                 <DeletePost post={post} />
               </div>
+              
             </div>
             
-                <Post post={post} />
+            <Post post={post} />
              
-
             <div className={styles.statPostIdContainer}>
               <MakeComment parentId={post.id} subredditId={post.subredditId} />
 

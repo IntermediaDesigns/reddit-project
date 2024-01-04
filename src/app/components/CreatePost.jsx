@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
-import { HiXCircle } from 'react-icons/hi';
+import { VscCloseAll } from "react-icons/vsc";
 import CreateSubreddit from './CreateSubreddit.jsx';
 import { useRouter } from 'next/navigation.js';
 
@@ -67,7 +67,7 @@ export default function CreatePost({ subreddits }) {
         <form className={styles.createFormContainer} onSubmit={handlePostSubmit}>
           <div className={styles.topFormContainer}>
             <div className={styles.closeBtn} onClick={() => setShowForm(false)}>
-              <HiXCircle />
+            <VscCloseAll />
             </div>
 
             <p className={styles.createPostTitle}>Create Post</p>
@@ -76,12 +76,13 @@ export default function CreatePost({ subreddits }) {
               <CreateSubreddit />
 
               <div className={styles.dropdownSub}>
+                <p className={styles.selectSubTitle}>or</p>
                 <select
                   className={styles.subSelect}
                   value={subreddit}
                   onChange={handleSubredditChange}
                 >
-                  <option value=''>or Select Subreddit</option>
+                  <option value=''>Select Subreddit</option>
                   {subreddits.map((subreddit) => (
                     <option key={subreddit.id} value={subreddit.id}>
                       {subreddit.name}

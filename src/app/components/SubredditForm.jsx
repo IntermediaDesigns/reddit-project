@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
-import { HiXCircle } from 'react-icons/hi';
+import { VscCloseAll } from "react-icons/vsc";
 import { useRouter } from 'next/navigation.js';
 
 export default function SubredditForm() {
@@ -51,7 +51,7 @@ export default function SubredditForm() {
         <form className={styles.createFormContainer} onSubmit={handleSubmit}>
           <div className={styles.topFormContainer}>
             <div className={styles.closeBtn} onClick={() => setShowForm(false)}>
-              <HiXCircle />
+            <VscCloseAll />
             </div>
 
             <p className={styles.createPostTitle}>Create Subreddit</p>
