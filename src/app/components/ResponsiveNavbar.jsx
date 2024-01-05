@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
 import { useRouter, useSearchParams } from 'next/navigation';
 import styles from '@/app/page.module.css';
+import Cookies from 'js-cookie';
 
 export default function ResponsiveNavbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -17,6 +18,23 @@ export default function ResponsiveNavbar() {
   const searchParams = useSearchParams();
   const isLoggedIn = searchParams.get('isLoggedIn');
   console.log(isLoggedIn);
+
+  useEffect(() => {
+       const token = Cookies.get('token');
+       
+       console.log(token)
+       const handleResize = () => {
+         if (window.innerWidth > 768 && menuOpen) {
+           setMenuOpen(false);
+         }
+       };
+   
+       window.addEventListener('resize', handleResize);
+   
+       return () => {
+         window.removeEventListener('resize', handleResize);
+       };
+     }, [menuOpen]);
 
   return (
     <>

@@ -9,6 +9,7 @@ export default async function postIdPage({ params }) {
   const { postId } = params;
   const post = await prisma.post.findFirst({
     where: { parentId: null, id: postId },
+    orderBy: { createdAt: 'desc' },
     include: {
       user: true,
       subreddit: true,

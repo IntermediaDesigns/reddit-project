@@ -5,6 +5,7 @@ import Link from 'next/link.js';
 import getTotalComments from './components/getTotalComments.js';
 import Votes from './components/Votes.jsx';
 import CreatePost from './components/CreatePost.jsx';
+import { fetchUser } from './lib/fetchUser.js';
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
@@ -30,10 +31,14 @@ export default async function Home() {
     },
   });
 
+  const user = await fetchUser();
+
   subreddits.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
+    
     <div className={styles.mainContainer}>
+
       <p className={styles.mainRedditTitle}>Reddit</p>
 
       <CreatePost subreddits={subreddits} />
@@ -41,7 +46,7 @@ export default async function Home() {
       {postsWithTotalComments.map((post) => {
         return (
           <div className={styles.postsContainer} key={post.id}>
-            {/* <Votes votes={post.votes} /> */}
+            <Votes post={post} user={user} />
 
             <div className={styles.innerPostContainer}>
               <div className={styles.titlePostContainer}>

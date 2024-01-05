@@ -9,8 +9,10 @@ import DeleteComment from './DeleteComment.jsx';
 export default async function ChildrenComments({ postId }) {
   const post = await prisma.post.findUnique({
     where: { id: postId },
+    
     include: { user: true, children: true },
   });
+
 
   if (!post) {
     return null;
