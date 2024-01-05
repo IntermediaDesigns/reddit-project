@@ -7,6 +7,7 @@ export default function Votes ({ post, user }) {
   const [numberOfVotes, setNumberOfVotes] = useState(0)
   const [error, setError] = useState('')
   const router = useRouter()
+  const [voted, setVoted] = useState(false);
 
   useEffect(() => {
     let totalVotes = 0
@@ -36,6 +37,10 @@ export default function Votes ({ post, user }) {
       return
     }
 
+    if (voted) {
+      boolean = !boolean; 
+    }
+
     const response = await fetch('/api/votes', {
       method: 'POST',
       body: JSON.stringify({
@@ -55,9 +60,11 @@ export default function Votes ({ post, user }) {
         } else {
           setNumberOfVotes(numberOfVotes - 1)
         }
-        router.refresh()
+        setVoted(!voted);
+        router.refresh();
       }
     }
+    
   }
 
   async function handleDownvote (boolean) {
@@ -70,6 +77,11 @@ export default function Votes ({ post, user }) {
       console.error('Post is undefined')
       return
     }
+
+    if (voted) {
+      boolean = !boolean; 
+    }
+
     console.log('handleDownvote');
     console.log(boolean);
     const response = await fetch('/api/votes', {
@@ -90,8 +102,10 @@ export default function Votes ({ post, user }) {
         } else {
           setNumberOfVotes(numberOfVotes - 1)
         }
-        router.refresh()
+        setVoted(!voted);
+        router.refresh();
       }
+      
     }
   }
 

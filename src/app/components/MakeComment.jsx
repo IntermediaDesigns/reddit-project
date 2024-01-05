@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
 import { useRouter } from 'next/navigation.js';
 
-export default function MakeComment({ parentId, subredditId }) {
+export default function MakeComment({ parentId, subredditId, user }) {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [showForm, setShowForm] = useState(false);

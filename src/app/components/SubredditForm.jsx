@@ -4,7 +4,7 @@ import styles from '@/app/page.module.css';
 import { VscCloseAll } from "react-icons/vsc";
 import { useRouter } from 'next/navigation.js';
 
-export default function SubredditForm() {
+export default function SubredditForm({user}) {
   const [showForm, setShowForm] = useState(false);
   const [subredditName, setSubredditName] = useState('');
   const [error, setError] = useState('');

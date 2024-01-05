@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import styles from '@/app/page.module.css';
 import Cookies from 'js-cookie';
 
-export default function ResponsiveNavbar() {
+export default function ResponsiveNavbar({user}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const router = useRouter();

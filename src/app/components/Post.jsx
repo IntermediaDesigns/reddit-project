@@ -4,7 +4,7 @@ import { HiPencilAlt } from 'react-icons/hi';
 import styles from '@/app/page.module.css';
 import { useRouter } from 'next/navigation.js';
 
-export default function EditPost({ post }) {
+export default function EditPost({ post, user }) {
   const [error, setError] = useState('');
   const router = useRouter();
   const [message, setMessage] = useState(post.message);

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
 import { MdPostAdd } from "react-icons/md";
 
-export default function CreateSubreddit() {
+export default function CreateSubreddit({user}) {
   const [subredditName, setSubredditName] = useState('');
 
   const handleInputChange = (event) => {

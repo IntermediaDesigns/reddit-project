@@ -5,7 +5,7 @@ import { VscCloseAll } from "react-icons/vsc";
 import CreateSubreddit from './CreateSubreddit.jsx';
 import { useRouter } from 'next/navigation.js';
 
-export default function CreatePost({ subreddits }) {
+export default function CreatePost({ subreddits, user }) {
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState('');
   const [error, setError] = useState('');

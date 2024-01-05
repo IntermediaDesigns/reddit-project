@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee+Spice&family=Mina:wght@400;700&display=swap');
 
 /* Loading Spinner */
+.loadingContainer{
+  display: flex;
+  justify-content: center;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 10rem;
+}
 .loader {
   width: 48px;
   height: 48px;

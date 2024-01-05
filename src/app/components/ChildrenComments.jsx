@@ -6,7 +6,7 @@ import MakeChildComment from './MakeChildComment.jsx';
 import EditChildComment from './EditChildComment.jsx';
 import DeleteComment from './DeleteComment.jsx';
 
-export default async function ChildrenComments({ postId }) {
+export default async function ChildrenComments({ postId, user }) {
   const post = await prisma.post.findUnique({
     where: { id: postId },
     

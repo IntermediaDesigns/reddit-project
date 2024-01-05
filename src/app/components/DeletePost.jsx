@@ -4,7 +4,7 @@ import styles from '@/app/page.module.css';
 import { HiXCircle } from 'react-icons/hi';
 import { useRouter } from 'next/navigation.js';
 
-export default function DeletePost({ post }) {
+export default function DeletePost({ post, user }) {
   const [error, setError] = useState('');
   const router = useRouter();
 
