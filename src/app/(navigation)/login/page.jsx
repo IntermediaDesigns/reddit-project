@@ -26,11 +26,11 @@ export default function Login() {
         document.cookie = `token=${data.token}; path=/`;
 
         setLoginSuccess(true);
-      setTimeout(() => {
-        setLoginSuccess(false); 
-        router.push('/?isLoggedIn=true'); 
-        router.refresh();
-      }, 1500); 
+        setTimeout(() => {
+          setLoginSuccess(false);
+          router.push('/?isLoggedIn=true');
+          router.refresh();
+        }, 1500);
       } else {
         setError(data.error);
       }

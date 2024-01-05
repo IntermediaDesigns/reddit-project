@@ -5,8 +5,12 @@ import { BsArrowReturnRight } from 'react-icons/bs';
 import MakeChildComment from './MakeChildComment.jsx';
 import EditChildComment from './EditChildComment.jsx';
 import DeleteComment from './DeleteComment.jsx';
+import { fetchUser } from '../lib/fetchUser.js';
 
-export default async function ChildrenComments({ postId, user }) {
+export default async function ChildrenComments({ postId}) {
+
+  const user = await fetchUser();
+
   const post = await prisma.post.findUnique({
     where: { id: postId },
     

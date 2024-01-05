@@ -8,7 +8,9 @@ export default function Votes ({ post, user }) {
   const [error, setError] = useState('')
   const router = useRouter()
   const [voted, setVoted] = useState(false);
+  const [voteType, setVoteType] = useState(null);
 
+  
   useEffect(() => {
     let totalVotes = 0
 
@@ -22,10 +24,11 @@ export default function Votes ({ post, user }) {
       }
     }
     setNumberOfVotes(totalVotes)
-  }, [])
+  }, [post.votes])
 
   async function handleUpvote (boolean) {
     console.log('handleUpvote')
+    
 
     if (!post) {
       console.error('Post is undefined')
@@ -36,9 +39,14 @@ export default function Votes ({ post, user }) {
       console.error('User is not logged in')
       return
     }
-
-    if (voted) {
-      boolean = !boolean; 
+    let isUpvote = true;
+    if (voted && voteType === 'upvote') {
+      isUpvote = null; // to remove the vote
+      setVoteType(null);
+      setVoted(false);
+    } else {
+      setVoteType('upvote');
+      setVoted(true);
     }
 
     const response = await fetch('/api/votes', {
@@ -46,6 +54,7 @@ export default function Votes ({ post, user }) {
       body: JSON.stringify({
         postId: post.id,
         isUpvote: boolean,
+        userId: user.id,
       })
     })
 
@@ -56,11 +65,12 @@ export default function Votes ({ post, user }) {
         setError(data.error)
       } else {
         if (boolean) {
-          setNumberOfVotes(numberOfVotes + 1)
+          setNumberOfVotes(numberOfVotes + (isUpvote ? 1 : -1))
         } else {
           setNumberOfVotes(numberOfVotes - 1)
         }
         setVoted(!voted);
+        setVoteType('upvote');
         router.refresh();
       }
     }
@@ -78,8 +88,14 @@ export default function Votes ({ post, user }) {
       return
     }
 
-    if (voted) {
-      boolean = !boolean; 
+    let isUpvote = false;
+    if (voted && voteType === 'downvote') {
+      isUpvote = null; // to remove the vote
+      setVoteType(null);
+      setVoted(false);
+    } else {
+      setVoteType('downvote');
+      setVoted(true);
     }
 
     console.log('handleDownvote');
@@ -100,9 +116,10 @@ export default function Votes ({ post, user }) {
         if (boolean) {
           setNumberOfVotes(numberOfVotes + 1)
         } else {
-          setNumberOfVotes(numberOfVotes - 1)
+          setNumberOfVotes(numberOfVotes + (isUpvote === false ? -1 : 1))
         }
         setVoted(!voted);
+        setVoteType('downvote');
         router.refresh();
       }
       
@@ -113,13 +130,13 @@ export default function Votes ({ post, user }) {
 
   return (
     <div className={styles.postsVoteContainer}>
-      <button className={styles.clickVote} onClick={() => handleUpvote(true)}>
+      <button className={styles.clickVote} onClick={() => handleUpvote(true)} style={{ backgroundColor: voteType === 'upvote' ? 'tomato' : 'initial' }}>
         ⬆️
       </button>
       {numberOfVotes}
       <button
         className={styles.clickVote}
-        onClick={() => handleDownvote(false)}
+        onClick={() => handleDownvote(false)} style={{ backgroundColor: voteType === 'downvote' ? 'tomato' : 'initial' }}
       >
         ⬇️
       </button>
