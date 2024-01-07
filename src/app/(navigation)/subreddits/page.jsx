@@ -2,14 +2,13 @@ import styles from '@/app/page.module.css';
 import { prisma } from '@/app/lib/prisma.js';
 import Link from 'next/link.js';
 import SubredditForm from '@/app/components/SubredditForm.jsx';
-import cookie from 'cookie';
 import { fetchUser } from '../../lib/fetchUser.js';
 
-const user = await fetchUser();
-const Subreddits = async () => {
+
+export default async function Subreddits(){
+  const user = await fetchUser();
   
   const subreddit = await prisma.subreddit.findMany({
-    orderBy: { createdAt: "desc" },
     include: {
       posts: {
         where: {
@@ -19,7 +18,7 @@ const Subreddits = async () => {
     },
   });
  
-  // subreddit.sort((a, b) => a.name.localeCompare(b.name));
+  subreddit.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className={styles.mainSubContainer}>
@@ -49,31 +48,3 @@ const Subreddits = async () => {
     </div>
   );
 }
-
-Subreddits.getInitialProps = async (ctx) => {
-  const { req } = ctx;
-  const cookies = cookie.parse(req ? req.headers.cookie || "" : document.cookie);
-  const { sessionId } = cookies;
-
-  const isLoggedIn = Boolean(sessionId);
-
-  const subreddits = await prisma.subreddit.findMany({
-    orderBy: { createdAt: "desc" },
-    include: {
-      posts: {
-        where: {
-          parentId: null
-        }
-      },
-    },
-  });
-
-  // subreddits.sort((a, b) => a.name.localeCompare(b.name));
-
-  return {
-    subreddits,
-    isLoggedIn,
-  };
-}
-
-export default Subreddits;
