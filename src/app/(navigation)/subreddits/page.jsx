@@ -10,9 +10,6 @@ export default async function Subreddits(){
   
   
   const subreddits = await prisma.subreddit.findMany({
-    orderBy: {
-      createdAt: 'desc'
-    },
     include: {
       posts: {
         where: {
@@ -22,7 +19,7 @@ export default async function Subreddits(){
     },
   });
  
-  // subreddits.sort((a, b) => a.name.localeCompare(b.name));
+  subreddits.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className={styles.mainSubContainer}>
