@@ -23,15 +23,7 @@ export default async function Home() {
     })
   );
 
-  const subreddits = await prisma.subreddit.findMany({
-    include: {
-      posts: {
-        where: {
-          parentId: null,
-        },
-      },
-    },
-  });
+  const subreddits = await prisma.subreddit.findMany();
 
   const user = await fetchUser();
 
