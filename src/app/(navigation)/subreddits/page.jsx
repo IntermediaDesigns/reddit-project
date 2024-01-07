@@ -9,6 +9,7 @@ const user = await fetchUser();
 const Subreddits = async () => {
   
   const subreddit = await prisma.subreddit.findMany({
+    orderBy: { createdAt: "desc" },
     include: {
       posts: {
         where: {
@@ -18,7 +19,7 @@ const Subreddits = async () => {
     },
   });
  
-  subreddit.sort((a, b) => a.name.localeCompare(b.name));
+  // subreddit.sort((a, b) => a.name.localeCompare(b.name));
 
   return (
     <div className={styles.mainSubContainer}>
@@ -57,6 +58,7 @@ Subreddits.getInitialProps = async (ctx) => {
   const isLoggedIn = Boolean(sessionId);
 
   const subreddits = await prisma.subreddit.findMany({
+    orderBy: { createdAt: "desc" },
     include: {
       posts: {
         where: {
@@ -66,7 +68,7 @@ Subreddits.getInitialProps = async (ctx) => {
     },
   });
 
-  subreddits.sort((a, b) => a.name.localeCompare(b.name));
+  // subreddits.sort((a, b) => a.name.localeCompare(b.name));
 
   return {
     subreddits,
