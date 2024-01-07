@@ -9,10 +9,14 @@ export default function EditPost({ post, user }) {
   const router = useRouter();
   const [message, setMessage] = useState(post.message);
   const [showForm, setShowForm] = useState(false);
-  
 
   async function handleEditPost(event) {
     event.preventDefault();
+
+    if (!user || !user.id) {
+      setError('You must be logged in to edit a post.');
+      return;
+    }
 
     const response = await fetch(`/api/posts/${post.id}`, {
       method: 'PUT',
@@ -32,12 +36,23 @@ export default function EditPost({ post, user }) {
 
   return (
     <>
-      <div className={styles.editIconContainer}>
-        <div className={styles.editPostBtn}>
-          <HiPencilAlt onClick={() => setShowForm(!showForm)} />
+      {user && user.id && (
+        <div className={styles.editIconContainer}>
+          <div className={styles.editPostBtn}>
+            <HiPencilAlt
+              onClick={() => {
+                if (!user) {
+                  setError('You must be logged in to edit.');
+                  return;
+                }
+                setShowForm(!showForm);
+              }}
+            />
+          </div>
         </div>
-      </div>
-      {showForm && (
+      )}
+
+      {showForm && user && user.id && (
         <form className={styles.commentFormContainer} onSubmit={handleEditPost}>
           <input
             type='text'
@@ -47,7 +62,7 @@ export default function EditPost({ post, user }) {
             className={styles.postFormTextInput}
           ></input>
 
-          <button className={styles.commentBtn} type='submit' >
+          <button className={styles.commentBtn} type='submit'>
             <span className={styles.spanComment}>💬 Submit</span>
           </button>
         </form>
@@ -55,7 +70,7 @@ export default function EditPost({ post, user }) {
 
       {!showForm && <div className={styles.postId}>{post.message}</div>}
 
-      <p>{error}</p>
+      {error && <p>{error}</p>}
     </>
   );
 }

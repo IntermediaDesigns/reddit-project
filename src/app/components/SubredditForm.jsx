@@ -9,9 +9,28 @@ export default function SubredditForm({user}) {
   const [subredditName, setSubredditName] = useState('');
   const [error, setError] = useState('');
   const router = useRouter();
+  const [isLoggedIn, setIsLoggedIn] = useState(user.id);
+  const [submitClicked, setSubmitClicked] = useState(false);
+
+  const handleInputChange = (event, setInputState) => {
+    setInputState(event.target.value);
+    setError('');
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setSubmitClicked(true);
+
+    if (!isLoggedIn) {
+      setError('You must be logged in to submit.');
+      return;
+    }
+    
+    if (!subredditName) {
+      setError('Subreddit Name must be entered before submitting.');
+      return;
+    }
+
     try {
       const response = await fetch('/api/subreddits', {
         method: 'POST',
@@ -42,15 +61,27 @@ export default function SubredditForm({user}) {
       )}
 
       {!showForm && (
-        <button className={styles.createBtn} onClick={() => setShowForm(true)}>
+        <button className={styles.createBtn} onClick={() => {
+          if (!isLoggedIn) {
+            setError('You must be logged in to create a post.');
+            setTimeout(() => setError(''), 5000);
+          } else {
+            setShowForm(true);
+          }
+        }}>
           <span className={styles.spanCreateBtn}>Create Subreddit</span>
         </button>
       )}
 
-      {showForm && (
+{!showForm && error && <div className={styles.voteError}>{error}</div>}
+
+      {showForm && isLoggedIn && (
         <form className={styles.createFormContainer} onSubmit={handleSubmit}>
           <div className={styles.topFormContainer}>
-            <div className={styles.closeBtn} onClick={() => setShowForm(false)}>
+            <div className={styles.closeBtn} onClick={() => {
+                setShowForm(false);
+                setError('');
+              }}>
             <VscCloseAll />
             </div>
 
@@ -61,15 +92,19 @@ export default function SubredditForm({user}) {
                 <input
                   className={styles.titleInput}
                   type='text'
+                  required
                   value={subredditName}
                   placeholder='Enter Subreddit Name'
-                  onChange={(e) => setSubredditName(e.target.value)}
+                  onChange={(e) => handleInputChange(e, setSubredditName)}
                 />
               </div>
             </div>
             <button className={styles.createBtn} type='submit'>
               <span className={styles.spanCreateBtn}>Submit</span>
             </button>
+            {submitClicked && error && (
+              <div className={styles.voteError}>{error}</div>
+            )}
           </div>
         </form>
       )}

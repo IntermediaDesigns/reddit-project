@@ -7,10 +7,15 @@ import { useRouter } from 'next/navigation.js';
 export default function DeleteComment({ post, user }) {
   const [error, setError] = useState('');
   const router = useRouter();
+  const [showForm, setShowForm] = useState(false);
 
   async function handleDeleteComment(event) {
     event.preventDefault();
     
+    if (!user || !user.id) {
+      setError('You must be logged in to delete a comment.');
+      return;
+    }    
 
     const response = await fetch(`/api/posts/${post.id}`, {
       method: 'DELETE',
@@ -20,16 +25,21 @@ export default function DeleteComment({ post, user }) {
     if (!data.success) {
       setError(data.error);
     } else {
+      setShowForm(false);
       router.refresh();
     }
   }
        
   return (
     <>
-      <div className={styles.deleteBtn}>
-        <HiXCircle onClick={handleDeleteComment} />
-      </div>
-      <p>{error}</p>
+      {!showForm && user && user.id && (
+        <>
+          <div className={styles.deleteBtn}>
+            <HiXCircle onClick={handleDeleteComment} />
+          </div>
+          {error && <p>{error}</p>}
+        </>
+      )}
     </>
   );
 }

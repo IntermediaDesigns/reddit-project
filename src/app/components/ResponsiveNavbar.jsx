@@ -2,22 +2,20 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
-import { useRouter, useSearchParams } from 'next/navigation';
 import styles from '@/app/page.module.css';
 import Cookies from 'js-cookie';
 
 export default function ResponsiveNavbar({user}) {
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const router = useRouter();
 
   const handleNav = () => {
     setMenuOpen(!menuOpen);
   };
 
-  const searchParams = useSearchParams();
-  const isLoggedIn = searchParams.get('isLoggedIn');
-  console.log(isLoggedIn);
+
+  const isLoggedIn = user.id;
+  
 
   useEffect(() => {
        const token = Cookies.get('token');
@@ -112,7 +110,7 @@ export default function ResponsiveNavbar({user}) {
             <div className={styles.menuItems}>
               <Link
                 onClick={handleNav}
-                // onClick={() => handleLinkClick('/')}
+                
                 href={'/'}
               >
                 <img src='/Home2.png' alt='Home' width='50' />

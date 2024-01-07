@@ -13,6 +13,11 @@ export default function EditChildComment({ post, user }) {
   async function handleEditPost(event) {
     event.preventDefault();
 
+    if (!user || !user.id) {
+      setError('You must be logged in to edit a post.');
+      return;
+    }
+
     const response = await fetch(`/api/posts/${post.id}`, {
       method: 'PUT',
       body: JSON.stringify({
@@ -31,11 +36,21 @@ export default function EditChildComment({ post, user }) {
 
   return (
     <>
-    <div className={styles.editChildCommentBtn}>
-        <HiPencilAlt onClick={() => setShowForm(!showForm)} />
+    {user && user.id && (
+      <div className={styles.editChildCommentBtn}>
+        <HiPencilAlt
+          onClick={() => {
+            if (!user) {
+              setError('You must be logged in to edit.');
+              return;
+            }
+            setShowForm(!showForm);
+          }}
+        />
       </div>
-      
-      {showForm && (
+      )}
+
+      {showForm && user && user.id && (
         <form
           className={styles.childCommentFormContainer}
           onSubmit={handleEditPost}
@@ -57,9 +72,8 @@ export default function EditChildComment({ post, user }) {
       {!showForm && (
         <div className={styles.commentChildContainer}>{post.message}</div>
       )}
-      
-      
-      <p>{error}</p>
+
+      {error && <p>{error}</p>}
     </>
   );
 }

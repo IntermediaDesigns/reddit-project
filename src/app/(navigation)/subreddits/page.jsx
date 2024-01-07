@@ -3,8 +3,9 @@ import { prisma } from '@/app/lib/prisma.js';
 import Link from 'next/link.js';
 import SubredditForm from '@/app/components/SubredditForm.jsx';
 import cookie from 'cookie';
+import { fetchUser } from '../../lib/fetchUser.js';
 
-
+const user = await fetchUser();
 const Subreddits = async () => {
   
   const subreddit = await prisma.subreddit.findMany({
@@ -23,7 +24,7 @@ const Subreddits = async () => {
     <div className={styles.mainSubContainer}>
       <p className={styles.subredditTitle}>Subreddits</p>
 
-      <SubredditForm />
+      <SubredditForm user={user} />
 
       {subreddit.map((subreddit) => (
         <div className={styles.subredditContainer} key={subreddit.id}>

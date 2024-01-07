@@ -1,9 +1,11 @@
-'use client'
+'use client';
 import React, { useState } from 'react';
 import styles from '@/app/page.module.css';
-import { MdPostAdd } from "react-icons/md";
+import { MdPostAdd } from 'react-icons/md';
+import { useRouter } from 'next/navigation.js';
 
-export default function CreateSubreddit({user}) {
+export default function CreateSubreddit({ user }) {
+  const router = useRouter();
   const [subredditName, setSubredditName] = useState('');
 
   const handleInputChange = (event) => {
@@ -11,19 +13,29 @@ export default function CreateSubreddit({user}) {
   };
 
   const handleConfirmClick = async () => {
-const response = await fetch(`/api/subreddits`, {
-       method: 'POST',
-       headers: {
-              'Content-Type': 'application/json',
-       },
-       body: JSON.stringify({ name: subredditName }),
-});
-
-    if (response.ok) {
-      setSubredditName('');
-    } else {
-      console.error('Failed to create subreddit');
+    if (!user || !user.id) {
+      console.error('You must be logged in to create a subreddit.');
+      return;
     }
+
+    try {
+      const response = await fetch('/api/subreddits', {
+        method: 'POST',
+        body: JSON.stringify({ name: subredditName }),
+      });
+      const data = await response.json();
+      if (data.error) {
+        setError(data.error);
+      } else {
+        router.refresh();
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setSubredditName('');
+      router.refresh();
+    }
+    router.refresh();
   };
 
   return (
@@ -35,7 +47,7 @@ const response = await fetch(`/api/subreddits`, {
           type='text'
           placeholder='Enter Subreddit Name'
           value={subredditName}
-          onChange={handleInputChange}
+          onChange={(e) => handleInputChange(e, setSubredditName)}
         />
       </div>
       <MdPostAdd

@@ -44,9 +44,11 @@ export default function Logout() {
     <div className={styles.logoutContainer}>
       <p className={styles.logoutTitle}>Log Out</p>
       <img className={styles.logoutImg} src="/logout.png" width={90} alt="logout"></img>
+
       {!logoutMessage && !error && (
         <button className={styles.logoutBtn} onClick={handleLogout}>Logout</button>
       )}
+      
       {logoutMessage && (
         <div>
           <p className={styles.errorText}>{logoutMessage}</p>

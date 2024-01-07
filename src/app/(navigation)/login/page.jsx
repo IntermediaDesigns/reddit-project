@@ -7,16 +7,13 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const router = useRouter();
 
   async function handleLogin(e) {
     e.preventDefault();
     const res = await fetch('/api/users/login', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
       body: JSON.stringify({ username, password }),
     });
 
@@ -25,9 +22,9 @@ export default function Login() {
       if (data.success) {
         document.cookie = `token=${data.token}; path=/`;
 
-        setLoginSuccess(true);
+        setIsLoggedIn(true);
         setTimeout(() => {
-          setLoginSuccess(false);
+          setIsLoggedIn(false);
           router.push('/?isLoggedIn=true');
           router.refresh();
         }, 1500);
@@ -76,7 +73,7 @@ export default function Login() {
         </p>
         <p className={styles.formError}>{error}</p>
       </form>
-      {loginSuccess && (
+      {isLoggedIn && (
         <div className={styles.alert}>You have successfully logged in!</div>
       )}
     </div>

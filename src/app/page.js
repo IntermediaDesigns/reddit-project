@@ -3,9 +3,11 @@ import './globals.css';
 import { prisma } from '@/app/lib/prisma.js';
 import Link from 'next/link.js';
 import getTotalComments from './components/getTotalComments.js';
-import Votes from './components/Votes.jsx';
 import CreatePost from './components/CreatePost.jsx';
 import { fetchUser } from './lib/fetchUser.js';
+import { CheckVotes } from './components/CheckVotes.jsx';
+
+export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const posts = await prisma.post.findMany({
@@ -41,12 +43,13 @@ export default async function Home() {
 
       <p className={styles.mainRedditTitle}>Reddit</p>
 
-      <CreatePost subreddits={subreddits} />
+      <CreatePost subreddits={subreddits} user={user} />
 
       {postsWithTotalComments.map((post) => {
         return (
           <div className={styles.postsContainer} key={post.id}>
-            <Votes post={post} user={user} />
+            <CheckVotes post={post} user={user}/>
+            
 
             <div className={styles.innerPostContainer}>
               <div className={styles.titlePostContainer}>

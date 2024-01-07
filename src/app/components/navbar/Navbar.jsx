@@ -8,7 +8,7 @@ export default async function Navbar() {
   return (
     <>
       <nav className='navBarContainer'>
-        <ResponsiveNavbar />      
+        <ResponsiveNavbar user={user} />      
       </nav>
     </>
   );

@@ -4,8 +4,11 @@ import ChildrenComments from '@/app/components/ChildrenComments.jsx';
 import MakeComment from '@/app/components/MakeComment.jsx';
 import DeletePost from '@/app/components/DeletePost.jsx';
 import Post from '@/app/components/Post.jsx';
+import Votes from '@/app/components/Votes.jsx';
+import { fetchUser } from '@/app/lib/fetchUser.js';
 
 export default async function postIdPage({ params }) {
+
   const { postId } = params;
   const post = await prisma.post.findFirst({
     where: { parentId: null, id: postId },
@@ -17,17 +20,15 @@ export default async function postIdPage({ params }) {
     },
   });
 
+  const user = await fetchUser();
+
   return (
     <div className={styles.mainContainer}>
       <p className={styles.mainPostTitle}>{post.title}</p>
 
       {post && (
         <div className={styles.postIdContainer} key={post.id}>
-          <div className={styles.postIdVoteContainer}>
-            <button className={styles.clickVote}>⬆️</button>
-            {post.votes || 0}
-            <button className={styles.clickVote}>⬇️</button>
-          </div>
+          <Votes post={post} user={user}/>
 
           <div className={styles.innerPostIdContainer}>
             <div className={styles.postIdUserContainer}>
@@ -38,15 +39,15 @@ export default async function postIdPage({ params }) {
                 </div>
               )}
               <div className={styles.iconContainer}>
-                <DeletePost post={post} />
+                <DeletePost post={post} user={user} />
               </div>
               
             </div>
             
-            <Post post={post} />
+            <Post post={post} user={user}/>
              
             <div className={styles.statPostIdContainer}>
-              <MakeComment parentId={post.id} subredditId={post.subredditId} />
+              <MakeComment parentId={post.id} subredditId={post.subredditId} user={user} post={post}/>
 
               <div className={styles.postIdDateContainer}>
                 <p className={styles.datePostIdStat}>
