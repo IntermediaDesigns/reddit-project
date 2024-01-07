@@ -1,6 +1,6 @@
-import styles from '@/app/page.module.css';
+import styles from './page.module.css';
 import './globals.css';
-import { prisma } from '@/app/lib/prisma.js';
+import { prisma } from './lib/prisma.js';
 import Link from 'next/link.js';
 import getTotalComments from './components/getTotalComments.js';
 import CreatePost from './components/CreatePost.jsx';
